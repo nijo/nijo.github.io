@@ -1,0 +1,168 @@
+<html>
+	<body>
+		<h1 id="demo" ></h1>
+		<script>
+		async function mainFunction(){
+			const mainResponse = await fetch('https://nijojob.infinityfreeapp.com/Proxy.php?q=' + '/cards/');
+			const mainData = await mainResponse.text();
+			var parser = new DOMParser();
+			var doc = parser.parseFromString(mainData, 'text/html');
+			var links = doc.querySelectorAll('a');
+			let groupedData = [];
+			let urls = [];
+			links.forEach(row => {
+				if(row.attributes[0].nodeValue.search('/cards/') == 0){
+					urls.push('https://nijojob.infinityfreeapp.com/Proxy.php?q=' + row.attributes[0].nodeValue);
+				}
+			})
+			Promise.all(urls.map(url =>
+				fetch(url)
+				.then(response => {
+					return response.text();
+				})
+			))
+			.then(data => {
+				data.forEach(urlData => {
+					var secondParser = new DOMParser();
+					var dmt = secondParser.parseFromString(urlData, 'text/html');
+					imgData = dmt.querySelector('.card-detail__card');
+
+					primaryData = dmt.querySelector('.card-detail__content');
+
+					headerPrimaryData = primaryData.querySelector('.card-detail__header');
+
+					bodyPrimaryData = primaryData.querySelector('.card-detail__content-body');
+
+					attackData = bodyPrimaryData.querySelectorAll('.attack-summary-row');
+
+					secondaryData = dmt.querySelector('.card-detail__aside');
+
+					attackInfo = [];
+
+					ImageURL = imgData.querySelector('.game-card-image__img').attributes[1].nodeValue;
+
+					Name = headerPrimaryData.querySelector('h1').innerText.trim();
+
+					Rarity = '';
+					headerPrimaryData.querySelectorAll('.rarity-icon__icon').forEach(row => {
+						temp = row.attributes[0].nodeValue;
+						Rarity = Rarity + ', ' + 'Rarity/'+temp.substring(temp.search('--') + 2).replace(/^./, char => char.toUpperCase())+'.png';
+					});
+					Rarity = Rarity.substring(2);
+					Rarity = Rarity.split(', ');
+
+					if(headerPrimaryData.querySelector('.w-24px') != null) {
+						temp = headerPrimaryData.querySelector('.w-24px').children[0].attributes[0].nodeValue;
+						Type = 'Type/'+temp.substring(temp.search('--') + 7).replace(/^./, char => char.toUpperCase())+'.png';
+					}
+					else
+						Type = 'NA'
+
+					temp = headerPrimaryData.querySelectorAll('.fw-bold')[0].textContent.trim().replaceAll('\n', '').replaceAll('  ', '').split('|');
+					cardType = temp[0].trim();
+					Stage = temp[1].trim();
+					if(typeof temp[2] !== 'undefined')
+						Evolution = temp[2].trim();
+					else
+						Evolution = ''
+
+					if(typeof headerPrimaryData.querySelectorAll('.fw-bold')[1] !== 'undefined')
+						HP = headerPrimaryData.querySelectorAll('.fw-bold')[1].textContent.trim().replaceAll('\n', '').replaceAll('  ', '').replace('HP', '');
+					else
+						HP=''
+
+					if(bodyPrimaryData.querySelector('.gap-1') != null && bodyPrimaryData.querySelector('.gap-1').querySelector('.w-24px') != null){ 
+						temp = bodyPrimaryData.querySelector('.gap-1').querySelector('.w-24px').children[0].attributes[0].nodeValue;
+						Weakness = 'Type/'+temp.substring(temp.search('--') + 7).replace(/^./, char => char.toUpperCase())+'.png';
+					}
+					else
+						Weakness = '';
+
+					retreatCost = bodyPrimaryData.querySelector('.gap-2').querySelectorAll('.w-24px').length.toString();
+
+					if(bodyPrimaryData.querySelector('.fst-italic') != null){
+						Info = bodyPrimaryData.querySelector('.fst-italic').innerText.replaceAll('\n', ' ');
+					}
+					else{
+						Info = "NA"
+					}
+					attackData.forEach(row => {
+						attackCost = '';
+						attackExtra = '';
+						attackDamage = '';
+
+						row.querySelector('.attack-summary-row__primary').querySelector('.attack-summary-row__costs').querySelectorAll('.energy-icon').forEach(row => {
+							temp = row.attributes[0].nodeValue
+							attackCost = attackCost + ', ' + 'Type/'+temp.substring(temp.search('--') +7).replace(/^./, char => char.toUpperCase())+'.png';
+						});
+						attackCost = attackCost.substring(2);
+						attackCost = attackCost.split(', '); 
+
+						attackName = row.querySelector('.attack-summary-row__primary').querySelector('.attack-summary-row__name').textContent
+
+						if(row.querySelector('.attack-summary-row__primary').querySelector('.attack-summary-row__damage') != null)
+							attackDamage = row.querySelector('.attack-summary-row__primary').querySelector('.attack-summary-row__damage').textContent.trim()
+
+						if(row.querySelector('.attack-summary-row__footer') != null)
+							attackExtra = row.querySelector('.attack-summary-row__footer').textContent
+
+						attackInfo.push({attackCost, attackName, attackDamage, attackExtra});
+					});
+
+					if (bodyPrimaryData.querySelector('.ability-summary-row__name') != null)
+						abilityName = bodyPrimaryData.querySelector('.ability-summary-row__name').textContent.trim();
+					else
+						abilityName = ''
+
+					if(bodyPrimaryData.querySelector('.ability-summary-row__description') != null)
+						abilityDescription = bodyPrimaryData.querySelector('.ability-summary-row__description').textContent.trim();
+					else
+						abilityDescription = ''
+
+					Set = secondaryData.querySelector('.card-collection-summary__name').textContent.trim();
+
+					Pack = secondaryData.querySelectorAll('.content-box--no-border') [1].querySelector('a').textContent.trim().replaceAll('\n', '').replaceAll('  ', '');
+
+					links = dmt.querySelectorAll('link');
+					link = links[7].href;
+					slNo = link.split('/')[4].toUpperCase() + '-' + ('000' + link.split('/')[5]).slice(-3);
+					document.getElementById("demo").innerHTML = document.getElementById("demo").innerHTML + slNo;
+					groupedData.push({slNo, ImageURL, Name, Rarity, Type, cardType, Stage, Evolution, HP, Weakness, retreatCost, Set, Pack, Info, attackInfo, abilityName, abilityDescription})
+				})
+
+				groupedData.sort(function(a, b){
+					let x = a.slNo.toLowerCase();
+					let y = b.slNo.toLowerCase();
+					if (x < y) {return -1;}
+					if (x > y) {return 1;}
+					return 0;
+				})
+				groupedData.forEach(row => {
+					if(row.slNo == 'A1A-065')
+						row.Pack = 'Mew Pack';
+					else if(row.slNo == 'A1-283')
+						row.Pack = 'Finishing Gen 1';
+					else if(row.slNo == 'PROMO-A-050')
+						row.Pack = 'Poke Gold Offers';
+					else if(row.slNo == 'PROMO-A-015')
+						row.Pack = 'Premium Shop';
+					else if(row.Pack == 'Celestial Guardians: Solgaleo')
+						row.Pack = 'Solgaleo';
+					else if(row.Pack == 'Celestial Guardians: Lunala')
+						row.Pack = 'Lunala';
+				})
+				fetch("https://nijojob.infinityfreeapp.com/File.php", {
+					method: "POST",
+					headers: {
+						'Accept': 'application/json',
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(groupedData)
+				})
+				document.getElementById("demo").innerHTML = document.getElementById("demo").innerHTML + 'Done';
+			})
+		}
+		mainFunction();
+		</script>
+	</body>
+</html>
