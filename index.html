@@ -328,7 +328,7 @@
     async function loadAndGroupImages() {
         try {
             if (typeof localStorage['groupedData'] == 'undefined'){
-                const response = await fetch("https://nijojob.infinityfreeapp.com/PokemonData.json");
+                const response = await fetch("https://nijo.github.io/PokemonData.json");
                 const webData = await response.text();
                 const rows = JSON.parse(webData);
                 rows.forEach(row => {
