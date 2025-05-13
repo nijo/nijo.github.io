@@ -46,14 +46,14 @@
 					Rarity = '';
 					headerPrimaryData.querySelectorAll('.rarity-icon__icon').forEach(row => {
 						temp = row.attributes[0].nodeValue;
-						Rarity = Rarity + ', ' + 'Rarity/'+temp.substring(temp.search('--') + 2).replace(/^./, char => char.toUpperCase())+'.png';
+						Rarity = Rarity + ', ' + temp.substring(temp.search('--') + 2).replace(/^./, char => char.toUpperCase());
 					});
 					Rarity = Rarity.substring(2);
 					Rarity = Rarity.split(', ');
 
 					if(headerPrimaryData.querySelector('.w-24px') != null) {
 						temp = headerPrimaryData.querySelector('.w-24px').children[0].attributes[0].nodeValue;
-						Type = 'Type/'+temp.substring(temp.search('--') + 7).replace(/^./, char => char.toUpperCase())+'.png';
+						Type = temp.substring(temp.search('--') + 7).replace(/^./, char => char.toUpperCase());
 					}
 					else
 						Type = 'NA'
@@ -73,7 +73,7 @@
 
 					if(bodyPrimaryData.querySelector('.gap-1') != null && bodyPrimaryData.querySelector('.gap-1').querySelector('.w-24px') != null){ 
 						temp = bodyPrimaryData.querySelector('.gap-1').querySelector('.w-24px').children[0].attributes[0].nodeValue;
-						Weakness = 'Type/'+temp.substring(temp.search('--') + 7).replace(/^./, char => char.toUpperCase())+'.png';
+						Weakness = temp.substring(temp.search('--') + 7).replace(/^./, char => char.toUpperCase());
 					}
 					else
 						Weakness = '';
@@ -93,7 +93,7 @@
 
 						row.querySelector('.attack-summary-row__primary').querySelector('.attack-summary-row__costs').querySelectorAll('.energy-icon').forEach(row => {
 							temp = row.attributes[0].nodeValue
-							attackCost = attackCost + ', ' + 'Type/'+temp.substring(temp.search('--') +7).replace(/^./, char => char.toUpperCase())+'.png';
+							attackCost = attackCost + ', ' +temp.substring(temp.search('--') +7).replace(/^./, char => char.toUpperCase());
 						});
 						attackCost = attackCost.substring(2);
 						attackCost = attackCost.split(', '); 

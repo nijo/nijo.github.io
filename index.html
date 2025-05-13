@@ -328,7 +328,7 @@
     async function loadAndGroupImages() {
         try {
             if (typeof localStorage['groupedData'] == 'undefined'){
-                const response = await fetch("https://nijo.github.io/PokemonData.json");
+                const response = await fetch("https://nijojob.infinityfreeapp.com/PokemonData.json");
                 const webData = await response.text();
                 const rows = JSON.parse(webData);
                 rows.forEach(row => {
@@ -415,7 +415,7 @@
             if(filterType == 'type' || filterType == 'weakness'){
                 if(option != 'NA'){
                     const img = document.createElement('img');
-                    img.src = option;
+                    img.src = 'Type/' + option + '.png';
                     img.alt = option;
                     img.for = `${filterType}${option}`;
                     img.style.width ='14px';
@@ -430,7 +430,7 @@
                 option = option.split(',');
                 option.forEach(item => {
                     const img = document.createElement('img');
-                    img.src = item;
+                    img.src = 'Rarity/' + item + '.png';
                     img.alt = item;
                     img.for = `${filterType}${option}`;
                     img.style.width ='14px';
@@ -572,16 +572,16 @@
         modalImage.src = pokemon.imageUrl;
         modalImage.alt = pokemon.name;
         const attacks = pokemon.attackInfo.map(function(a) {return `<li><strong data-bs-toggle="tooltip" data-bs-html="true" title="${a.attackExtra ? '<em>' + a.attackExtra + '</em>' : ''}">${a.attackExtra ? '<u>' + a.attackName + '</u>' : a.attackName}</strong> - ${a.attackDamage || '00'}</li>` ;}).join('');
-        const rarity = pokemon.rarity.map(a => `<img src=${a} style="width:14px">`).join('');
+        const rarity = pokemon.rarity.map(a => `<img src="Rarity/"+${a}+".png" style="width:14px">`).join('');
         modalDescription.innerHTML = `
             <div class="row"><div class='col'><strong data-bs-toggle="tooltip" data-bs-html="true" title="<em>${pokemon.info}</em>">${pokemon.name}</strong></div></div>
             <div class="row"><div class='col-5'><strong>ID:</strong></div><div class='col-7'>${pokemon.id}</div></div>
             <div class="row"><div class='col-5'><strong>Rarity:</strong></div><div class='col-7'>${rarity}</div></div>
-            <div class="row"><div class='col-5'><strong>Type:</strong></div><div class='col-7'><img style="width:14px" src=${pokemon.type}></div></div>
+            <div class="row"><div class='col-5'><strong>Type:</strong></div><div class='col-7'><img style="width:14px" src="Type/"+${pokemon.type}+".png"></div></div>
             <div class="row"><div class='col-5'><strong>HP:</strong></div><div class='col-7'>${pokemon.hp}</div></div>
             <div class="row"><div class='col-5'><strong>Stage:</strong></div><div class='col-7'><span data-bs-toggle="tooltip" data-bs-html="true" title="${pokemon.evolution ? '<em>' + pokemon.evolution + '</em>' : ''}">${pokemon.stage}</span></div></div>
             <div class="row"><div class='col-5'><strong>Card Type:</strong></div><div class='col-7'>${pokemon.cardType}</div></div>
-            <div class="row"><div class='col-5'><strong>Weakness:</strong></div><div class='col-7'><img style="width:14px" src=${pokemon.weakness}></div></div>
+            <div class="row"><div class='col-5'><strong>Weakness:</strong></div><div class='col-7'><img style="width:14px" src="Type/"+${pokemon.weakness}+".png"></div></div>
             <div class="row"><div class='col-5'><strong>Retreat Cost:</strong></div><div class='col-7'>${pokemon.retreatCost}</div></div>
             <div class="row"><div class='col-5'><strong>Set:</strong></div><div class='col-7'>${pokemon.set}</div></div>
             <div class="row"><div class='col-5'><strong>Pack:</strong></div><div class='col-7'>${pokemon.pack}</div></div>
