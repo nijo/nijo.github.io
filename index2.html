@@ -229,7 +229,7 @@ function renderData(data) {
 async function loadTableData() {
     try {
         if (typeof localStorage['groupedData'] == 'undefined'){
-            const response = await fetch("db.php");
+            const response = await fetch("db.json");
             const data = await response.json();
             data.forEach(row => {
                 const [id, name, rarity, pack, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count] = [ row.slNo, row.Name, row.Rarity, row.Pack, row.Type, row.ImageURL, row.Stage, row.HP, row.Weakness, row.evolvesFrom, row.evolvesInto, row.cardType, row.retreatCost, row.Set, row.Info, row.abilityName, row.abilityDescription, row.attackInfo, row.Count ];
