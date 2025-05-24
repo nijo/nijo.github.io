@@ -7,274 +7,105 @@
     <title>Pokémon TCG Pocket Gallery</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .navbar {
-            background-color: #aaaaaa;
-        }
-        .navbar .btn-group .btn {
-            color: white;
-            margin: 2px 0px;
-        }
-        .photo {
-            margin: 1px;
-            border: none;
-            border-radius: 10px;
-            overflow: hidden;
-            display: inline-block;
-            vertical-align: top;
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        .photo:hover {
-            transform: scale(1.05);
-        }
-        .photo img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            cursor: pointer;
-        }
-        .photo .caption {
-            padding: 5px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #555;
-        }
-        /* Modal styling */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-        }
-        .modal:target {
-            display: flex; /* Show the modal when targeted */
-        }
-        .btn-group {
-            width: 32.6%;
-        }
-        .dropdown-menu {
-            padding: 8px;
-            width: max-content;
-            --bs-dropdown-min-width: 0;
-        }
-        /* Media queries for responsive design */
-        @media (max-width: 4000px) {
-            .photo {
-                width: calc(10% - 2px); /* 10 columns on large screens */
-            }
-            #imageModal .col:nth-child(3){
-                text-align: end;
-            }
-            #modalDescription{
-                margin-left: 1px;
-            }
-        }
-        @media (max-width: 2000px) {
-            .photo {
-                width: calc(16.66% - 2px); /* 5 columns on medium screens */
-            }
-            #imageModal .col:nth-child(3){
-                text-align: end;
-            }
-            #modalDescription{
-                margin-left: 3px;
-            }
-        }
-        @media (max-width: 1000px) {
-            .photo {
-                width: calc(33.33% - 2px); /* 3 column on extra small screens */
-            }
-            #prevButton, #nextButton {
-                top: 256px;
-            }
-            #imageModal .col:nth-child(3){
-                text-align: center;
-            }
-            #modalDescription{
-                margin: 0 auto;
-            }
-        }
-        #closeButton{
-            top: 0px;
-            left: 0px;
-            position: absolute;
-        }
-        #prevButton, #nextButton, #closeButton{
-            background-color: rgba(255, 255, 255, 0.25);
-            border: none;
-            font-size: 1rem;
-            color: white;
-            z-index: 1000;
-        }
-        .mb-2{
-            width: 100%;
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                /*transform: translateY(20px);*/
-            }
-            to {
-                opacity: 1;
-                /*transform: translateY(0);*/
-            }
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-        .photo.highlight {
-            animation: highlight 0.5s ease-in-out;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
-        }
-
-        @keyframes highlight {
-            from {
-                transform: scale(1.1);
-            }
-            to {
-                transform: scale(1);
-            }
-        }
-        #modalDescription{
-        	background-color: white;
-        	color: black;
-        	border-radius: 15px;
-        }
-        .col-7{
-        	border-bottom: 1px solid black;
-        	border-left: 1px solid black;
-        }
-        .col-5{
-            border-bottom: 1px solid black;
-        }
-        .row{
-        	margin: 0px;
-        	padding: 0px;
-        }
-        #modalDescription div{
-        	height: calc(512px/14.5);
-        }
-        #modalDescription .row:first-child .col strong{
-        	font-size: 40px;
-        }
-        #modalDescription .row:first-child .col{
-        	text-align: center;
-        }
-        #modalDescription .row:first-child{
-        	height: calc((512px/14.5)*2);
-        	border-bottom: 1px solid black;
-        }
-        #modalDescription .row:last-child .col-5, #modalDescription .row:last-child .col-7{
-        	height: calc((512px/14.5)*1.5);
-        	border-bottom: 0px solid black;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="Container" class="container-fluid">
-        <nav class="navbar navbar-expand-lg">
-            <div class="container d-flex flex-column">
-                <div class="mb-2 d-flex">
-                <input type="text" id="searchInput" class="form-control" placeholder="Search cards...">
-                <select id="searchField" class="form-select" style="width: 150px; margin-left: 10px;">
-                    <option value="all">All Fields</option>
-                    <option value="name">Name</option>
-                    <option value="id">ID</option>
-                    <option value="evolution">Evolution</option>
-                </select>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container d-flex flex-column">
+            <div class="mb-2 d-flex">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search cards...">
+            <select id="searchField" class="form-select" style="width: 150px; margin-left: 10px;">
+                <option value="all">All Fields</option>
+                <option value="name">Name</option>
+                <option value="id">ID</option>
+                <option value="evolvesFrom">Evolves From</option>
+                <option value="evolvesInto">Evolves Into</option>
+            </select>
+            </div>
+            <div class="mb-2 container-fluid" id="Filters" style='display:none'>
+                <div class="btn-group" role="group" aria-label="Set filter">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Set</button>
+                    <ul id="setFilter" class="dropdown-menu">
+                        <!-- Checkboxes will be populated dynamically -->
+                    </ul>
                 </div>
-                <div class="mb-2 container-fluid" id="Filters" style='display:none'>
-                    <div class="btn-group" role="group" aria-label="Set filter">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Set</button>
-                        <ul id="setFilter" class="dropdown-menu">
-                            <!-- Checkboxes will be populated dynamically -->
-                        </ul>
-                    </div>
-                    <div class="btn-group" role="group" aria-label="Pack filter">
-                        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Pack</button>
-                        <ul id="packFilter" class="dropdown-menu">
-                            <!-- Checkboxes will be populated dynamically -->
-                        </ul>
-                    </div>
-                    <div class="btn-group" role="group" aria-label="card Type filter">
-                        <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Card Type</button>
-                        <ul id="cardTypeFilter" class="dropdown-menu">
-                            <!-- Checkboxes will be populated dynamically -->
-                        </ul>
-                    </div>
-                    <div class="btn-group" role="group" aria-label="Stage filter">
-                        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Stage</button>
-                        <ul id="stageFilter" class="dropdown-menu">
-                            <!-- Checkboxes will be populated dynamically -->
-                        </ul>
-                    </div>
-                    <div class="btn-group" role="group" aria-label="Rarity filter">
-                        <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Rarity</button>
-                        <ul id="rarityFilter" class="dropdown-menu">
-                            <!-- Checkboxes will be populated dynamically -->
-                        </ul>
-                    </div>
-                    <div class="btn-group" role="group" aria-label="Type filter">
-                        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Type</button>
-                        <ul id="typeFilter" class="dropdown-menu">
-                            <!-- Checkboxes will be populated dynamically -->
-                        </ul>
-                    </div>
-                    <div class="btn-group" role="group" aria-label="Weakness filter">
-                        <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Weakness</button>
-                        <ul id="weaknessFilter" class="dropdown-menu">
-                            <!-- Checkboxes will be populated dynamically -->
-                        </ul>
-                    </div>
-                    <div class="btn-group" role="group" aria-label="retreat Cost filter">
-                        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Retreat</button>
-                        <ul id="retreatCostFilter" class="dropdown-menu">
-                            <!-- Checkboxes will be populated dynamically -->
-                        </ul>
-                    </div>
-                    <div class="btn-group" role="group" aria-label="Ability filter">
-                        <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Ability</button>
-                        <ul id="abilityFilter" class="dropdown-menu">
-                            <!-- Checkboxes will be populated dynamically -->
-                        </ul>
-                    </div>
+                <div class="btn-group" role="group" aria-label="Pack filter">
+                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Pack</button>
+                    <ul id="packFilter" class="dropdown-menu">
+                        <!-- Checkboxes will be populated dynamically -->
+                    </ul>
                 </div>
-                <div style='width:100%;text-align:center'>
-                    <div class="btn-group" role="group" aria-label="Set filter">
-                        <button type="button" onclick="divToggle()" class="btn btn-secondary">Filters</button>
-                    </div>
-                    <div class="btn-group" role="group" aria-label="Sort options">
-                        <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Sort By</button>
-                        <ul id="sortOptions" class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" onclick="sortImages('id', 'asc')">Id (Asc)</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="sortImages('id', 'desc')">Id (Desc)</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="sortImages('name', 'asc')">Name (Asc)</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="sortImages('name', 'desc')">Name (Desc)</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="sortImages('attack', 'asc')">Attack (Asc)</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="sortImages('attack', 'desc')">Attack (Desc)</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="sortImages('hp', 'asc')">HP (Asc)</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="sortImages('hp', 'desc')">HP (Desc)</a></li>
-                        </ul>
-                    </div>
+                <div class="btn-group" role="group" aria-label="card Type filter">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Card Type</button>
+                    <ul id="cardTypeFilter" class="dropdown-menu">
+                        <!-- Checkboxes will be populated dynamically -->
+                    </ul>
+                </div>
+                <div class="btn-group" role="group" aria-label="Stage filter">
+                    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Stage</button>
+                    <ul id="stageFilter" class="dropdown-menu">
+                        <!-- Checkboxes will be populated dynamically -->
+                    </ul>
+                </div>
+                <div class="btn-group" role="group" aria-label="Rarity filter">
+                    <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Rarity</button>
+                    <ul id="rarityFilter" class="dropdown-menu">
+                        <!-- Checkboxes will be populated dynamically -->
+                    </ul>
+                </div>
+                <div class="btn-group" role="group" aria-label="Type filter">
+                    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Type</button>
+                    <ul id="typeFilter" class="dropdown-menu">
+                        <!-- Checkboxes will be populated dynamically -->
+                    </ul>
+                </div>
+                <div class="btn-group" role="group" aria-label="Weakness filter">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Weakness</button>
+                    <ul id="weaknessFilter" class="dropdown-menu">
+                        <!-- Checkboxes will be populated dynamically -->
+                    </ul>
+                </div>
+                <div class="btn-group" role="group" aria-label="retreat Cost filter">
+                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Retreat</button>
+                    <ul id="retreatCostFilter" class="dropdown-menu">
+                        <!-- Checkboxes will be populated dynamically -->
+                    </ul>
+                </div>
+                <div class="btn-group" role="group" aria-label="Ability filter">
+                    <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Ability</button>
+                    <ul id="abilityFilter" class="dropdown-menu">
+                        <!-- Checkboxes will be populated dynamically -->
+                    </ul>
                 </div>
             </div>
-        </nav>
-        <div id="Gallery" class="container-fluid"></div>
+            <div style='width:100%;text-align:center'>
+                <div class="btn-group" role="group" aria-label="Set filter">
+                    <button type="button" onclick="divToggle()" class="btn btn-secondary">Filters</button>
+                </div>
+                <div class="btn-group" role="group" aria-label="Sort options">
+                    <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Sort By</button>
+                    <ul id="sortOptions" class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#" onclick="sortImages('id', 'asc')">Id (Asc)</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="sortImages('id', 'desc')">Id (Desc)</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="sortImages('name', 'asc')">Name (Asc)</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="sortImages('name', 'desc')">Name (Desc)</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="sortImages('attack', 'asc')">Attack (Asc)</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="sortImages('attack', 'desc')">Attack (Desc)</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="sortImages('hp', 'asc')">HP (Asc)</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="sortImages('hp', 'desc')">HP (Desc)</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="sortImages('count', 'asc')">Count (Asc)</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="sortImages('count', 'desc')">Count (Desc)</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container-lg my-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <div id="Gallery" class="container-fluid"></div>
+            </div>
+        </div> 
     </div>
     <!-- Modal -->
     <div class="modal" id="imageModal">
@@ -295,45 +126,17 @@
         </button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
     <script>
-        let currentFilters = {
-            cardType: 'all',
-            rarity: 'all',
-            type: 'all',
-            stage: 'all',
-            weakness: 'all',
-            set: 'all',
-            pack: 'all',
-            retreatCost: 'all',
-            ability: 'all'
-        };
-    
-        let currentImageIndex = 0;
-        let groupedData = [];
-        let filteredData = [];
-        let SearchedData = [];
-        let searchQuery = "";
-        let defaultCriteria = 'id';
-        let defaultOrder = 'asc';
-        const sets = new Set();
-        const rarities = new Set();
-        const types = new Set();
-        const stages = new Set();
-        const weaknesses = new Set();
-        const cardTypes = new Set();
-        const packs = new Set();
-        const retreatCosts = new Set();
-        const abilities = new Set();
 
     async function loadAndGroupImages() {
         try {
             if (typeof localStorage['groupedData'] == 'undefined'){
-                const response = await fetch("https://nijojob.infinityfreeapp.com/PokemonData.json");
-                const webData = await response.text();
-                const rows = JSON.parse(webData);
-                rows.forEach(row => {
-                    const [id, name, rarity, pack, type, imageUrl, stage, hp, weakness, evolution, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo] = [ row.slNo, row.Name, row.Rarity, row.Pack, row.Type, row.ImageURL, row.Stage, row.HP, row.Weakness, row.Evolution, row.cardType, row.retreatCost, row.Set, row.Info, row.abilityName, row.abilityDescription, row.attackInfo];
-                    groupedData.push({ id, name, pack, rarity, type, imageUrl, stage, hp, weakness, evolution, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo });
+                const response = await fetch("db.php");
+                const data = await response.json();
+                data.forEach(row => {
+                    const [id, name, rarity, pack, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count] = [ row.slNo, row.Name, row.Rarity, row.Pack, row.Type, row.ImageURL, row.Stage, row.HP, row.Weakness, row.evolvesFrom, row.evolvesInto, row.cardType, row.retreatCost, row.Set, row.Info, row.abilityName, row.abilityDescription, row.attackInfo, row.Count ];
+                    groupedData.push({ id, name, pack, rarity, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count });
                 });
                 localStorage['groupedData'] = JSON.stringify(groupedData);
             }
@@ -341,7 +144,7 @@
                 groupedData = JSON.parse(localStorage['groupedData']); 
             }
             groupedData.forEach(row => {
-                const [id, name, rarity, pack, type, imageUrl, stage, hp, weakness, evolution, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo] = [ row.id, row.name, row.rarity, row.pack, row.type, row.imageUrl, row.stage, row.hp, row.weakness, row.evolution, row.cardType, row.retreatCost, row.set, row.info, row.abilityName, row.abilityDescription, row.attackInfo];
+                const [id, name, rarity, pack, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count] = [ row.id, row.name, row.rarity, row.pack, row.type, row.imageUrl, row.stage, row.hp, row.weakness, row.evolvesFrom, row.evolvesInto, row.cardType, row.retreatCost, row.set, row.info, row.abilityName, row.abilityDescription, row.attackInfo, row.count];
                 if (set) sets.add(set);
                 if (rarity.toString()) rarities.add(rarity.toString());
                 if (type) types.add(type);
@@ -353,7 +156,7 @@
                 abilities.add('Yes');
             });
             SearchedData = groupedData;
-            displayImages(groupedData);
+            renderData(groupedData);
             
             populateFilterCheckboxes('setFilter', sets, 'set');
             populateFilterCheckboxes('rarityFilter', rarities, 'rarity');
@@ -370,11 +173,12 @@
         }
     }
 
-    function displayImages(groupedData) {
+    function renderData(groupedData) {
         const galleryContainer = document.getElementById('Gallery');
     
         // Fade out the gallery
         galleryContainer.style.opacity = 0;
+        galleryContainer.style.padding = '0px';
         setTimeout(() => {
             galleryContainer.innerHTML = ''; // Clear existing content
 
@@ -397,171 +201,6 @@
         }, 300); // Delay to allow fade-out animation
     }
 
-    //Create and get filters.
-
-    function populateFilterCheckboxes(filterId, options, filterType) {
-        const filter = document.getElementById(filterId);
-        options.forEach(option => {
-            const li = document.createElement('li');
-            const div = document.createElement('div');
-            div.classList.add('form-check');
-            const input = document.createElement('input');
-            input.classList.add('form-check-input');
-            input.type = 'checkbox';
-            input.value = option;
-            input.name = `${filterType}`;
-            input.id = `${filterType}${option}`;
-            input.onclick = () => getFilters(filterId, filterType, option);
-            if(filterType == 'type' || filterType == 'weakness'){
-                if(option != 'NA'){
-                    const img = document.createElement('img');
-                    img.src = 'Type/' + option + '.png';
-                    img.alt = option;
-                    img.for = `${filterType}${option}`;
-                    img.style.width ='14px';
-                    div.appendChild(img);}
-                else{
-                    const label = document.createElement('label');
-                    label.innerHTML = option;
-                    div.appendChild(label);
-                }
-            }
-            else if(filterType == 'rarity'){
-                option = option.split(',');
-                option.forEach(item => {
-                    const img = document.createElement('img');
-                    img.src = 'Rarity/' + item + '.png';
-                    img.alt = item;
-                    img.for = `${filterType}${option}`;
-                    img.style.width ='14px';
-                    div.appendChild(img);
-                });
-            }
-            else{
-                const label = document.createElement('label');
-                label.innerHTML = option;
-                label.for = `${filterType}${option}`;
-                div.appendChild(label);
-            }
-                div.appendChild(input);
-                li.appendChild(div);
-                filter.appendChild(li);
-        });
-    }
-    function getFilters(filterId, filterType, filterValue) {
-        if (filterValue === 'all') {
-            currentFilters[filterType] = 'all';
-        } 
-        else {
-            const checkboxes = document.querySelectorAll(`#${filterType}Filter .form-check-input`);
-            const selectedValues = Array.from(checkboxes)
-                .filter(checkbox => checkbox.checked && checkbox.value !== 'all')
-                .map(checkbox => checkbox.value);
-            currentFilters[filterType] = selectedValues.length ? selectedValues : 'all';
-        }
-        document.getElementById(filterId).classList.remove('show');
-        setFilters(currentFilters, searchQuery);
-    }
-
-    document.getElementById('searchInput').addEventListener('input', function() {
-        searchQuery = this.value.toLowerCase();
-        setFilters(currentFilters, searchQuery);
-    });
-
-    //Apply search and dropdown filters
-    
-    function setFilters(currentFilters, searchQuery) {      
-        const selectedField = document.getElementById('searchField').value;
-        filteredData = groupedData.filter(row => {
-            if (
-                (currentFilters.set === 'all' || currentFilters.set.includes(row.set)) &&
-                (currentFilters.rarity === 'all' || currentFilters.rarity.includes(row.rarity.toString())) &&
-                (currentFilters.type === 'all' || currentFilters.type.includes(row.type)) &&
-                (currentFilters.stage === 'all' || currentFilters.stage.includes(row.stage)) &&
-                (currentFilters.weakness === 'all' || currentFilters.weakness.includes(row.weakness)) &&
-                (currentFilters.cardType === 'all' || currentFilters.cardType.includes(row.cardType)) &&
-                (currentFilters.pack === 'all' || currentFilters.pack.includes(row.pack)) &&
-                (currentFilters.retreatCost === 'all' || currentFilters.retreatCost.includes(row.retreatCost)) &&
-                (currentFilters.ability === 'all' || (currentFilters.ability.includes('Yes') && row.abilityName != ''))
-            ) {
-                if (selectedField === 'all') {
-                    return Object.entries(row).some(entry => String(entry[1]).toLowerCase().includes(searchQuery));
-                } else {
-                    return String(row[selectedField] || '').toLowerCase().includes(searchQuery);
-                }
-            }
-        });
-
-        SearchedData = filteredData;
-        sortImages(defaultCriteria, defaultOrder);
-
-        document.getElementById('Gallery').scrollIntoView({ behavior: 'smooth' });
-
-        // Highlight matching images
-        const galleryContainer = document.getElementById('Gallery');
-        const photos = galleryContainer.querySelectorAll('.photo');
-        photos.forEach(photo => photo.classList.remove('highlight'));
-        setTimeout(() => {
-            photos.forEach(photo => {
-                if (photo.querySelector('img').alt.toLowerCase().includes(searchQuery)) {
-                    photo.classList.add('highlight');
-                }
-            });
-        }, 300);
-    }
-    
-    //Sort images.
-
-    function sortImages(criteria, order) {
-        if(criteria === 'hp'){
-            if (order === 'asc') {
-                SearchedData.sort((a, b) => a[criteria] - b[criteria]);
-            } 
-            else{
-                SearchedData.sort((a, b) => b[criteria] - a[criteria]);
-            }
-        }
-        else if(criteria === 'attack'){
-            SearchedData.sort((a, b) => {
-                var valueA = 0;
-                var valueB = 0;
-                if(a['attackInfo'].length === 1){
-                    valueA = a['attackInfo'][0]['attackDamage'].replace('+', '').replace('x', '');
-                }
-                else if(a['attackInfo'].length === 2){
-                    valueA = a['attackInfo'][1]['attackDamage'].replace('+', '').replace('x', '');
-                }
-                if(b['attackInfo'].length === 1){
-                    valueB = b['attackInfo'][0]['attackDamage'].replace('+', '').replace('x', '');
-                }
-                else if(b['attackInfo'].length === 2){
-                    valueB = b['attackInfo'][1]['attackDamage'].replace('+', '').replace('x', '');
-                }
-                if (order === 'asc') {
-                    return valueA - valueB;
-                } 
-                else {
-                    return valueB - valueA;
-                }
-            });
-        }
-        else{
-            SearchedData.sort((a, b) => {
-                const valueA = (a[criteria] || '').toString().toLowerCase();
-                const valueB = (b[criteria] || '').toString().toLowerCase();
-                if (order === 'asc') {
-                    return valueA.localeCompare(valueB);
-                } 
-                else {
-                    return valueB.localeCompare(valueA);
-                }
-            });
-        }
-        defaultCriteria = criteria;
-        defaultOrder = order;
-        displayImages(SearchedData);
-    }
-
     // Modal section
     
     function openModal(index) {
@@ -569,19 +208,46 @@
         const modal = document.getElementById('imageModal');
         const modalImage = document.getElementById('modalImage');
         const modalDescription = document.getElementById('modalDescription');
+        let type = '';
+        let weakness = '';
         modalImage.src = pokemon.imageUrl;
         modalImage.alt = pokemon.name;
-        const attacks = pokemon.attackInfo.map(function(a) {return `<li><strong data-bs-toggle="tooltip" data-bs-html="true" title="${a.attackExtra ? '<em>' + a.attackExtra + '</em>' : ''}">${a.attackExtra ? '<u>' + a.attackName + '</u>' : a.attackName}</strong> - ${a.attackDamage || '00'}</li>` ;}).join('');
-        const rarity = pokemon.rarity.map(a => `<img src="Rarity/"+${a}+".png" style="width:14px">`).join('');
+        const attacks = pokemon.attackInfo.map(function(a) {
+            return `<li><strong data-bs-toggle="tooltip" data-bs-html="true" title="${a.attackExtra ? '<em>' + a.attackExtra + '</em>' : ''}">
+                ${a.attackExtra ? '<u>' + a.attackName + '</u>' : a.attackName}</strong> - ${a.attackDamage || '00'} (${a.attackCost.map(b => `<img src="Type/${b}.png" style="width:14px">`).join('')})</li>`;
+        }).join('');
+        const rarity = pokemon.rarity.map(a => `<img src="Rarity/${a}.png" style="width:14px">`).join('');
+        let evolvesInto = '';
+        let temp = JSON.parse(JSON.stringify(pokemon.evolvesInto));
+        if (temp && temp.length !== 0) {
+            if (Array.isArray(temp)) {
+                evolvesInto = temp.join(', ');
+            } 
+            else {
+                evolvesInto = temp;
+            }
+        }
+        if(pokemon.type == 'NA' || pokemon.type == ''){
+            type = `<label>${pokemon.type}</label>`;            
+        }
+        else{
+            type = `<img src="Type/${pokemon.type}.png" alt="${pokemon.type}" style="width: 14px;">`;
+        }
+        if(pokemon.weakness == 'NA' || pokemon.weakness == ''){
+            weakness = `<label>${pokemon.weakness}</label>`;
+        }
+        else{
+            weakness = `<img src="Type/${pokemon.weakness}.png" alt="${pokemon.weakness}" style="width: 14px;">`;
+        }
         modalDescription.innerHTML = `
             <div class="row"><div class='col'><strong data-bs-toggle="tooltip" data-bs-html="true" title="<em>${pokemon.info}</em>">${pokemon.name}</strong></div></div>
             <div class="row"><div class='col-5'><strong>ID:</strong></div><div class='col-7'>${pokemon.id}</div></div>
             <div class="row"><div class='col-5'><strong>Rarity:</strong></div><div class='col-7'>${rarity}</div></div>
-            <div class="row"><div class='col-5'><strong>Type:</strong></div><div class='col-7'><img style="width:14px" src="Type/"+${pokemon.type}+".png"></div></div>
+            <div class="row"><div class='col-5'><strong>Type:</strong></div><div class='col-7'>${type}</div></div>
             <div class="row"><div class='col-5'><strong>HP:</strong></div><div class='col-7'>${pokemon.hp}</div></div>
-            <div class="row"><div class='col-5'><strong>Stage:</strong></div><div class='col-7'><span data-bs-toggle="tooltip" data-bs-html="true" title="${pokemon.evolution ? '<em>' + pokemon.evolution + '</em>' : ''}">${pokemon.stage}</span></div></div>
+            <div class="row"><div class='col-5'><strong>Stage:</strong></div><div class='col-7'><span data-bs-toggle="tooltip" data-bs-html="true" title="<em>Evolves From: ${pokemon.evolvesFrom}</em> || <em>Evolves To: ${evolvesInto}</em>">${pokemon.stage}</span></div></div>
             <div class="row"><div class='col-5'><strong>Card Type:</strong></div><div class='col-7'>${pokemon.cardType}</div></div>
-            <div class="row"><div class='col-5'><strong>Weakness:</strong></div><div class='col-7'><img style="width:14px" src="Type/"+${pokemon.weakness}+".png"></div></div>
+            <div class="row"><div class='col-5'><strong>Weakness:</strong></div><div class='col-7'>${weakness}</div></div>
             <div class="row"><div class='col-5'><strong>Retreat Cost:</strong></div><div class='col-7'>${pokemon.retreatCost}</div></div>
             <div class="row"><div class='col-5'><strong>Set:</strong></div><div class='col-7'>${pokemon.set}</div></div>
             <div class="row"><div class='col-5'><strong>Pack:</strong></div><div class='col-7'>${pokemon.pack}</div></div>
@@ -597,7 +263,7 @@
         modalImage.style.height = modalImage.naturalHeight.toString() + 'px';
         modalImage.style.width = modalImage.naturalWidth.toString() + 'px';
         modalDescription.style.height = modalImage.naturalHeight.toString() + 'px';
-        modalDescription.style.width = modalImage.naturalWidth.toString() + 'px';
+        modalDescription.style.width = (modalImage.naturalWidth * 1.25).toString() + 'px';
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
@@ -619,18 +285,8 @@
         openModal(currentImageIndex);
     }
     
-    function closeModal() {
-        document.getElementById('imageModal').style.display = 'none';
-    }
-    
-    function divToggle(){
-        var x = document.getElementById('Filters');
-        x.style.display === 'none'?x.style.display='block':x.style.display='none';
-    }
-    
     document.getElementById('nextButton').onclick = showNextImage;
     document.getElementById('prevButton').onclick = showPreviousImage;
-    document.getElementById('closeButton').onclick = closeModal;
     
     loadAndGroupImages(); // Replace with the actual path to your CSV file
 
