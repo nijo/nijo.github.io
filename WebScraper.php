@@ -298,7 +298,7 @@ foreach ($links as $url) {
     ];
 }
 header('Content-Type: application/json');
-echo json_encode($groupedData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+file_put_contents('PokemonData.json', json_encode($groupedData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
 $url = 'https://nijojob.infinityfreeapp.com/db.php'; // <-- Change to your actual URL
 $ch = curl_init($url);
