@@ -120,6 +120,12 @@ if ($method === 'GET') {
         if (isset($row['Rarity'])) $row['Rarity'] = json_decode($row['Rarity'], true);
         if (isset($row['evolvesInto'])) $row['evolvesInto'] = json_decode($row['evolvesInto'], true);
         if (isset($row['attackInfo'])) $row['attackInfo'] = json_decode($row['attackInfo'], true);
+        if (isset($row['attackInfo'][0]['attackDamage'])) $row['attackInfo'][0]['attackDamage'] = (int)$row['attackInfo'][0]['attackDamage'];
+        if (isset($row['attackInfo'][1]['attackDamage'])) $row['attackInfo'][1]['attackDamage'] = (int)$row['attackInfo'][1]['attackDamage'];
+        if (isset($row['HP'])) $row['HP'] = (int)$row['HP'];
+        if (isset($row['retreatCost'])) $row['retreatCost'] = (int)$row['retreatCost'];
+        if (isset($row['Count'])) $row['Count'] = (int)$row['Count'];
+
         $out[] = $row;
     }
     file_put_contents('PokemonData.json', json_encode($out, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
