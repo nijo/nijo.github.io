@@ -122,6 +122,7 @@ if ($method === 'GET') {
         if (isset($row['attackInfo'])) $row['attackInfo'] = json_decode($row['attackInfo'], true);
         $out[] = $row;
     }
+    file_put_contents('PokemonData.json', json_encode($out, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
     echo json_encode($out, JSON_UNESCAPED_UNICODE);
     $conn->close();
     exit;
