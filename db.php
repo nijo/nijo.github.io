@@ -122,7 +122,7 @@ if ($method === 'GET') {
         if (isset($row['attackInfo'])) $row['attackInfo'] = json_decode($row['attackInfo'], true);
         if (isset($row['attackInfo'][0]['attackDamage'])) $row['attackInfo'][0]['attackDamage'] = (int)$row['attackInfo'][0]['attackDamage'];
         if (isset($row['attackInfo'][1]['attackDamage'])) $row['attackInfo'][1]['attackDamage'] = (int)$row['attackInfo'][1]['attackDamage'];
-        if (isset($row['hp'])) $row['HP'] = (int)$row['hp'];
+        if (isset($row['hp'])) $row['hp'] = (int)$row['hp'];
         if (isset($row['retreatCost'])) $row['retreatCost'] = (int)$row['retreatCost'];
         if (isset($row['count'])) $row['count'] = (int)$row['count'];
 
