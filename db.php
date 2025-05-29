@@ -39,48 +39,48 @@ if ($method === 'POST') {
         exit;
     }
     $stmt = $conn->prepare("INSERT INTO pokemon_cards 
-        (slNo, ImageURL, Name, Rarity, Type, cardType, Stage, evolvesFrom, evolvesInto, HP, Weakness, retreatCost, `Set`, Pack, Info, attackInfo, abilityName, abilityDescription)
+        (slNo, imageURL, name, rarity, type, cardType, stage, evolvesFrom, evolvesInto, hp, weakness, retreatCost, `set`, pack, info, attackInfo, abilityName, abilityDescription)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ON DUPLICATE KEY UPDATE 
-            ImageURL=VALUES(ImageURL),
-            Name=VALUES(Name),
-            Rarity=VALUES(Rarity),
-            Type=VALUES(Type),
+            imageURL=VALUES(imageURL),
+            name=VALUES(name),
+            rarity=VALUES(rarity),
+            type=VALUES(type),
             cardType=VALUES(cardType),
-            Stage=VALUES(Stage),
+            stage=VALUES(stage),
             evolvesFrom=VALUES(evolvesFrom),
             evolvesInto=VALUES(evolvesInto),
-            HP=VALUES(HP),
-            Weakness=VALUES(Weakness),
+            hp=VALUES(hp),
+            weakness=VALUES(weakness),
             retreatCost=VALUES(retreatCost),
-            `Set`=VALUES(`Set`),
-            Pack=VALUES(Pack),
-            Info=VALUES(Info),
+            `set`=VALUES(`set`),
+            pack=VALUES(pack),
+            info=VALUES(info),
             attackInfo=VALUES(attackInfo),
             abilityName=VALUES(abilityName),
             abilityDescription=VALUES(abilityDescription)
     ");
     foreach ($data as $row) {
-        $rarity = json_encode($row['Rarity']);
+        $rarity = json_encode($row['rarity']);
         $attackInfo = json_encode($row['attackInfo']);
         $evolvesInto = json_encode($row['evolvesInto']);
         $stmt->bind_param(
             "ssssssssssssssssss",
             $row['slNo'],
-            $row['ImageURL'],
-            $row['Name'],
+            $row['imageURL'],
+            $row['name'],
             $rarity,
-            $row['Type'],
+            $row['type'],
             $row['cardType'],
-            $row['Stage'],
+            $row['stage'],
             $row['evolvesFrom'],
             $evolvesInto,
-            $row['HP'],
-            $row['Weakness'],
+            $row['hp'],
+            $row['weakness'],
             $row['retreatCost'],
-            $row['Set'],
-            $row['Pack'],
-            $row['Info'],
+            $row['set'],
+            $row['pack'],
+            $row['info'],
             $attackInfo,
             $row['abilityName'],
             $row['abilityDescription']
@@ -101,7 +101,7 @@ if ($method === 'POST') {
 
 if ($method === 'GET') {
     if (isset($_GET['custom_where'])) {
-        $sql = "SELECT SUM(Count) AS sum, Count(Count) AS cnt FROM pokemon_cards WHERE ".trim($_GET['custom_where']);
+        $sql = "SELECT SUM(count) AS sum, Count(count) AS cnt FROM pokemon_cards WHERE ".trim($_GET['custom_where']);
         $res = $conn->query($sql);
         if ($res && $row = $res->fetch_assoc()) {
             echo json_encode(['count' => $row['cnt'], 'sum' => $row['sum']]);
@@ -117,14 +117,14 @@ if ($method === 'GET') {
     $out = [];
     while ($row = $result->fetch_assoc()) {
         // Decode JSON fields
-        if (isset($row['Rarity'])) $row['Rarity'] = json_decode($row['Rarity'], true);
+        if (isset($row['rarity'])) $row['rarity'] = json_decode($row['rarity'], true);
         if (isset($row['evolvesInto'])) $row['evolvesInto'] = json_decode($row['evolvesInto'], true);
         if (isset($row['attackInfo'])) $row['attackInfo'] = json_decode($row['attackInfo'], true);
         if (isset($row['attackInfo'][0]['attackDamage'])) $row['attackInfo'][0]['attackDamage'] = (int)$row['attackInfo'][0]['attackDamage'];
         if (isset($row['attackInfo'][1]['attackDamage'])) $row['attackInfo'][1]['attackDamage'] = (int)$row['attackInfo'][1]['attackDamage'];
-        if (isset($row['HP'])) $row['HP'] = (int)$row['HP'];
+        if (isset($row['hp'])) $row['HP'] = (int)$row['hp'];
         if (isset($row['retreatCost'])) $row['retreatCost'] = (int)$row['retreatCost'];
-        if (isset($row['Count'])) $row['Count'] = (int)$row['Count'];
+        if (isset($row['count'])) $row['count'] = (int)$row['count'];
 
         $out[] = $row;
     }

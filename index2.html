@@ -232,7 +232,7 @@ async function loadTableData() {
             const response = await fetch("PokemonData.json");
             const data = await response.json();
             data.forEach(row => {
-                const [id, name, rarity, pack, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count] = [ row.slNo, row.Name, row.Rarity, row.Pack, row.Type, row.ImageURL, row.Stage, row.HP, row.Weakness, row.evolvesFrom, row.evolvesInto, row.cardType, row.retreatCost, row.Set, row.Info, row.abilityName, row.abilityDescription, row.attackInfo, row.Count ];
+                const [id, name, rarity, pack, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count] = [ row.slNo, row.name, row.rarity, row.pack, row.type, row.imageURL, row.stage, row.hp, row.weakness, row.evolvesFrom, row.evolvesInto, row.cardType, row.retreatCost, row.set, row.info, row.abilityName, row.abilityDescription, row.attackInfo, row.count ];
                 groupedData.push({ id, name, pack, rarity, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count });
             });
             localStorage['groupedData'] = JSON.stringify(groupedData);

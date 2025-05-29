@@ -265,8 +265,9 @@ foreach ($links as $url) {
     // Image URL
     $imgNode = $xp->query('//*[contains(@class,"game-card-image__img")]')->item(0);
     $ImageURL = $imgNode ? $imgNode->getAttribute('src') : '';
-    // file_put_contents($url, file_get_contents($ImageURL));
-    $ImageURL = 'Images/' . $slNo . '.webp';
+    $url = 'Images/' . $slNo . '.webp';
+    file_put_contents($url, file_get_contents($ImageURL));
+    $ImageURL = $url;
 
     // Custom pack fixes
     if ($slNo == 'A1A-065') $Pack = 'Mew Pack';
@@ -278,20 +279,20 @@ foreach ($links as $url) {
 
     $groupedData[] = [
         'slNo' => $slNo,
-        'ImageURL' => $ImageURL,
-        'Name' => $Name,
-        'Rarity' => $Rarity,
-        'Type' => $Type,
+        'imageURL' => $ImageURL,
+        'name' => $Name,
+        'rarity' => $Rarity,
+        'type' => $Type,
         'cardType' => $cardType,
-        'Stage' => $Stage,
+        'stage' => $Stage,
         'evolvesFrom' => $evolvesFrom,
         'evolvesInto' => $evolvesInto,
-        'HP' => $HP,
-        'Weakness' => $Weakness,
+        'hp' => $HP,
+        'weakness' => $Weakness,
         'retreatCost' => $retreatCostCount,
-        'Set' => $Set,
-        'Pack' => $Pack,
-        'Info' => $Info,
+        'set' => $Set,
+        'pack' => $Pack,
+        'info' => $Info,
         'attackInfo' => $attackInfo,
         'abilityName' => $abilityName,
         'abilityDescription' => $abilityDescription
