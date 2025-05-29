@@ -6935,7 +6935,7 @@
     {
         "slNo": "A1-198",
         "imageURL": "Images\/A1-198.webp",
-        "name": "Farfetch’d",
+        "name": "Farfetch'd",
         "rarity": [
             "Diamond"
         ],
@@ -11184,7 +11184,7 @@
     {
         "slNo": "A1A-036",
         "imageURL": "Images\/A1A-036.webp",
-        "name": "Flabébé",
+        "name": "Flabele",
         "rarity": [
             "Diamond"
         ],
@@ -23955,7 +23955,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 1
+        "count": 2
     },
     {
         "slNo": "A2B-023",
@@ -26198,7 +26198,7 @@
     {
         "slNo": "A2B-089",
         "imageURL": "Images\/A2B-089.webp",
-        "name": "Pokémon Center Lady",
+        "name": "Pokemon Center Lady",
         "rarity": [
             "Star",
             "Star"
@@ -26940,7 +26940,7 @@
     {
         "slNo": "A2B-111",
         "imageURL": "Images\/A2B-111.webp",
-        "name": "Poké Ball",
+        "name": "Poke Ball",
         "rarity": [
             "Crown"
         ],
@@ -27031,7 +27031,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 1
+        "count": 2
     },
     {
         "slNo": "A3-003",
@@ -27065,7 +27065,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 9
+        "count": 12
     },
     {
         "slNo": "A3-004",
@@ -27165,7 +27165,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 9
+        "count": 10
     },
     {
         "slNo": "A3-007",
@@ -27199,7 +27199,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 4
+        "count": 6
     },
     {
         "slNo": "A3-008",
@@ -27302,7 +27302,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 4
+        "count": 5
     },
     {
         "slNo": "A3-011",
@@ -27417,7 +27417,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 4
+        "count": 5
     },
     {
         "slNo": "A3-014",
@@ -27451,7 +27451,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 10
+        "count": 11
     },
     {
         "slNo": "A3-015",
@@ -27484,7 +27484,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 3
+        "count": 7
     },
     {
         "slNo": "A3-016",
@@ -27518,7 +27518,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 4
+        "count": 6
     },
     {
         "slNo": "A3-017",
@@ -27552,7 +27552,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 6
+        "count": 8
     },
     {
         "slNo": "A3-018",
@@ -27586,7 +27586,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 3
+        "count": 5
     },
     {
         "slNo": "A3-019",
@@ -27691,7 +27691,7 @@
         ],
         "abilityName": "Wimp Out",
         "abilityDescription": "During your first turn, this Pokémon has no Retreat Cost.",
-        "count": 5
+        "count": 6
     },
     {
         "slNo": "A3-022",
@@ -27836,7 +27836,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 13
+        "count": 15
     },
     {
         "slNo": "A3-026",
@@ -27871,7 +27871,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 4
+        "count": 5
     },
     {
         "slNo": "A3-027",
@@ -27940,7 +27940,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 6
+        "count": 7
     },
     {
         "slNo": "A3-029",
@@ -28043,7 +28043,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 3
+        "count": 5
     },
     {
         "slNo": "A3-032",
@@ -28157,7 +28157,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 2
+        "count": 4
     },
     {
         "slNo": "A3-035",
@@ -28191,7 +28191,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 15
+        "count": 17
     },
     {
         "slNo": "A3-036",
@@ -28224,7 +28224,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 6
+        "count": 8
     },
     {
         "slNo": "A3-037",
@@ -28260,7 +28260,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 1
+        "count": 2
     },
     {
         "slNo": "A3-038",
@@ -28294,7 +28294,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 7
+        "count": 10
     },
     {
         "slNo": "A3-039",
@@ -28327,7 +28327,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 3
+        "count": 4
     },
     {
         "slNo": "A3-040",
@@ -28431,7 +28431,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 4
+        "count": 5
     },
     {
         "slNo": "A3-043",
@@ -28500,7 +28500,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 6
+        "count": 8
     },
     {
         "slNo": "A3-045",
@@ -28568,7 +28568,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 8
+        "count": 9
     },
     {
         "slNo": "A3-047",
@@ -28705,7 +28705,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 5
+        "count": 6
     },
     {
         "slNo": "A3-051",
@@ -28742,7 +28742,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 0
+        "count": 1
     },
     {
         "slNo": "A3-052",
@@ -28844,7 +28844,7 @@
         ],
         "abilityName": "Innards Out",
         "abilityDescription": "If this Pokémon is in the Active Spot and is Knocked Out by damage from an attack from your opponent’s Pokémon, do 50 damage to the Attacking Pokémon.",
-        "count": 6
+        "count": 7
     },
     {
         "slNo": "A3-055",
@@ -28877,7 +28877,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 7
+        "count": 10
     },
     {
         "slNo": "A3-056",
@@ -28986,7 +28986,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 1
+        "count": 2
     },
     {
         "slNo": "A3-059",
@@ -29129,7 +29129,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 6
+        "count": 8
     },
     {
         "slNo": "A3-063",
@@ -29161,7 +29161,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 8
+        "count": 10
     },
     {
         "slNo": "A3-064",
@@ -29231,7 +29231,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 0
+        "count": 2
     },
     {
         "slNo": "A3-066",
@@ -29298,7 +29298,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 4
+        "count": 5
     },
     {
         "slNo": "A3-068",
@@ -29402,7 +29402,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 3
+        "count": 5
     },
     {
         "slNo": "A3-071",
@@ -29436,7 +29436,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 10
+        "count": 12
     },
     {
         "slNo": "A3-072",
@@ -29471,7 +29471,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 9
+        "count": 10
     },
     {
         "slNo": "A3-073",
@@ -29538,7 +29538,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 6
+        "count": 7
     },
     {
         "slNo": "A3-075",
@@ -29570,7 +29570,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 6
+        "count": 7
     },
     {
         "slNo": "A3-076",
@@ -29671,7 +29671,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 6
+        "count": 7
     },
     {
         "slNo": "A3-079",
@@ -29738,7 +29738,7 @@
         ],
         "abilityName": "Flower Shield",
         "abilityDescription": "Each of your Pokémon that has any  Energy attached recovers from all Special Conditions and can’t be affected by any Special Conditions.",
-        "count": 4
+        "count": 5
     },
     {
         "slNo": "A3-081",
@@ -29842,7 +29842,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 5
+        "count": 6
     },
     {
         "slNo": "A3-084",
@@ -29910,7 +29910,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 7
+        "count": 9
     },
     {
         "slNo": "A3-086",
@@ -30058,7 +30058,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 4
+        "count": 6
     },
     {
         "slNo": "A3-090",
@@ -30092,7 +30092,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 12
+        "count": 14
     },
     {
         "slNo": "A3-091",
@@ -30193,7 +30193,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 9
+        "count": 11
     },
     {
         "slNo": "A3-094",
@@ -30227,7 +30227,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 6
+        "count": 7
     },
     {
         "slNo": "A3-095",
@@ -30263,7 +30263,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 1
+        "count": 4
     },
     {
         "slNo": "A3-096",
@@ -30333,7 +30333,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 2
+        "count": 3
     },
     {
         "slNo": "A3-098",
@@ -30368,7 +30368,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 5
+        "count": 6
     },
     {
         "slNo": "A3-099",
@@ -30474,7 +30474,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 3
+        "count": 4
     },
     {
         "slNo": "A3-102",
@@ -30509,7 +30509,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 3
+        "count": 5
     },
     {
         "slNo": "A3-103",
@@ -30615,7 +30615,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 3
+        "count": 4
     },
     {
         "slNo": "A3-106",
@@ -30683,7 +30683,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 2
+        "count": 3
     },
     {
         "slNo": "A3-108",
@@ -30717,7 +30717,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 4
+        "count": 5
     },
     {
         "slNo": "A3-109",
@@ -30787,7 +30787,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 6
+        "count": 8
     },
     {
         "slNo": "A3-111",
@@ -30824,7 +30824,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 1
+        "count": 3
     },
     {
         "slNo": "A3-112",
@@ -30893,7 +30893,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 12
+        "count": 14
     },
     {
         "slNo": "A3-114",
@@ -30928,7 +30928,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 8
+        "count": 9
     },
     {
         "slNo": "A3-115",
@@ -30962,7 +30962,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 4
+        "count": 7
     },
     {
         "slNo": "A3-116",
@@ -30994,7 +30994,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 3
+        "count": 5
     },
     {
         "slNo": "A3-117",
@@ -31029,7 +31029,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 9
+        "count": 10
     },
     {
         "slNo": "A3-118",
@@ -31062,7 +31062,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 8
+        "count": 11
     },
     {
         "slNo": "A3-119",
@@ -31128,7 +31128,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 5
+        "count": 6
     },
     {
         "slNo": "A3-121",
@@ -31268,7 +31268,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 2
+        "count": 3
     },
     {
         "slNo": "A3-125",
@@ -31302,7 +31302,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 2
+        "count": 3
     },
     {
         "slNo": "A3-126",
@@ -31338,7 +31338,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 5
+        "count": 7
     },
     {
         "slNo": "A3-127",
@@ -31408,7 +31408,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 1
+        "count": 3
     },
     {
         "slNo": "A3-129",
@@ -31442,7 +31442,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 16
+        "count": 17
     },
     {
         "slNo": "A3-130",
@@ -31475,7 +31475,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 2
+        "count": 4
     },
     {
         "slNo": "A3-131",
@@ -31542,7 +31542,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 1
+        "count": 2
     },
     {
         "slNo": "A3-133",
@@ -31576,7 +31576,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 9
+        "count": 11
     },
     {
         "slNo": "A3-134",
@@ -31610,7 +31610,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 14
+        "count": 19
     },
     {
         "slNo": "A3-135",
@@ -31643,7 +31643,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 7
+        "count": 8
     },
     {
         "slNo": "A3-136",
@@ -31677,7 +31677,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 4
+        "count": 8
     },
     {
         "slNo": "A3-137",
@@ -31746,7 +31746,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 1
+        "count": 2
     },
     {
         "slNo": "A3-139",
@@ -31852,7 +31852,7 @@
         ],
         "abilityName": "Comatose",
         "abilityDescription": "As long as this Pokémon is in the Active Spot, whenever you attach an Energy from your Energy Zone to it, it is now Asleep.",
-        "count": 3
+        "count": 4
     },
     {
         "slNo": "A3-142",
@@ -31876,7 +31876,7 @@
         "attackInfo": [],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 4
+        "count": 5
     },
     {
         "slNo": "A3-143",
@@ -31924,7 +31924,7 @@
         "attackInfo": [],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 7
+        "count": 9
     },
     {
         "slNo": "A3-145",
@@ -31996,7 +31996,7 @@
         "attackInfo": [],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 0
+        "count": 1
     },
     {
         "slNo": "A3-148",
@@ -32020,7 +32020,7 @@
         "attackInfo": [],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 2
+        "count": 4
     },
     {
         "slNo": "A3-149",
@@ -32068,7 +32068,7 @@
         "attackInfo": [],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 6
+        "count": 8
     },
     {
         "slNo": "A3-151",
@@ -32116,7 +32116,7 @@
         "attackInfo": [],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 1
+        "count": 2
     },
     {
         "slNo": "A3-153",
@@ -32188,7 +32188,7 @@
         "attackInfo": [],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 2
+        "count": 3
     },
     {
         "slNo": "A3-156",
@@ -32490,7 +32490,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 0
+        "count": 1
     },
     {
         "slNo": "A3-165",
@@ -32523,7 +32523,7 @@
         ],
         "abilityName": "Safeguard",
         "abilityDescription": "Prevent all damage done to this Pokémon by attacks from your opponent’s Pokémon ex.",
-        "count": 1
+        "count": 2
     },
     {
         "slNo": "A3-166",
@@ -32996,7 +32996,7 @@
         ],
         "abilityName": "Comatose",
         "abilityDescription": "As long as this Pokémon is in the Active Spot, whenever you attach an Energy from your Energy Zone to it, it is now Asleep.",
-        "count": 0
+        "count": 1
     },
     {
         "slNo": "A3-180",
@@ -33406,7 +33406,7 @@
         "attackInfo": [],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 0
+        "count": 1
     },
     {
         "slNo": "A3-192",
@@ -34175,7 +34175,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 1
+        "count": 0
     },
     {
         "slNo": "A3-216",
@@ -34211,7 +34211,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 0
+        "count": 1
     },
     {
         "slNo": "A3-217",
@@ -38618,7 +38618,7 @@
     {
         "slNo": "PROMO-A-004",
         "imageURL": "Images\/PROMO-A-004.webp",
-        "name": "Pokédex",
+        "name": "Pokedex",
         "rarity": [
             "Diamond"
         ],
@@ -38641,7 +38641,7 @@
     {
         "slNo": "PROMO-A-005",
         "imageURL": "Images\/PROMO-A-005.webp",
-        "name": "Poké Ball",
+        "name": "Poke Ball",
         "rarity": [
             "Diamond"
         ],
@@ -38687,7 +38687,7 @@
     {
         "slNo": "PROMO-A-007",
         "imageURL": "Images\/PROMO-A-007.webp",
-        "name": "Professor’s Research",
+        "name": "Professor's Research",
         "rarity": [
             "Diamond"
         ],
@@ -38710,7 +38710,7 @@
     {
         "slNo": "PROMO-A-008",
         "imageURL": "Images\/PROMO-A-008.webp",
-        "name": "Pokédex",
+        "name": "Pokedex",
         "rarity": [
             "Diamond"
         ],
@@ -40610,7 +40610,7 @@
     {
         "slNo": "PROMO-A-062",
         "imageURL": "Images\/PROMO-A-062.webp",
-        "name": "Farfetch’d",
+        "name": "Farfetch'd",
         "rarity": [
             "Diamond"
         ],
@@ -40889,7 +40889,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 4
+        "count": 6
     },
     {
         "slNo": "PROMO-A-070",
@@ -40923,7 +40923,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 3
+        "count": 4
     },
     {
         "slNo": "PROMO-A-071",
@@ -40957,7 +40957,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 5
+        "count": 9
     },
     {
         "slNo": "PROMO-A-072",
@@ -40991,7 +40991,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 3
+        "count": 7
     },
     {
         "slNo": "PROMO-A-073",
@@ -41024,7 +41024,7 @@
         ],
         "abilityName": "",
         "abilityDescription": "",
-        "count": 3
+        "count": 4
     },
     {
         "slNo": "PROMO-A-074",

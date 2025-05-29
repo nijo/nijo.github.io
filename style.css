@@ -5,6 +5,9 @@
     box-shadow: 0 2px 8px #e3350d22;
     padding: 2rem 1rem 1rem 1rem;
 }
+#setRarityTable th {
+    text-align: left;
+}
 .card-header h1 {
     font-weight: 700;
     letter-spacing: 1px;
