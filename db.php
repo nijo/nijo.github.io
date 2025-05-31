@@ -25,8 +25,26 @@ if ($method === 'POST') {
         $stmt = $conn->prepare("UPDATE pokemon_cards SET Count=? WHERE slNo=?");
         $stmt->bind_param("is", $count, $slNo);
         $stmt->execute();
-        echo json_encode(['status' => 'success']);
         $stmt->close();
+
+        $sql = "SELECT * FROM pokemon_cards ORDER BY slNo ASC";
+        $result = $conn->query($sql);
+        $out = [];
+        while ($row = $result->fetch_assoc()) {
+            // Decode JSON fields
+            if (isset($row['rarity'])) $row['rarity'] = json_decode($row['rarity'], true);
+            if (isset($row['evolvesInto'])) $row['evolvesInto'] = json_decode($row['evolvesInto'], true);
+            if (isset($row['attackInfo'])) $row['attackInfo'] = json_decode($row['attackInfo'], true);
+            if (isset($row['attackInfo'][0]['attackDamage'])) $row['attackInfo'][0]['attackDamage'] = (int)$row['attackInfo'][0]['attackDamage'];
+            if (isset($row['attackInfo'][1]['attackDamage'])) $row['attackInfo'][1]['attackDamage'] = (int)$row['attackInfo'][1]['attackDamage'];
+            if (isset($row['hp'])) $row['hp'] = (int)$row['hp'];
+            if (isset($row['retreatCost'])) $row['retreatCost'] = (int)$row['retreatCost'];
+            if (isset($row['count'])) $row['count'] = (int)$row['count'];
+
+            $out[] = $row;
+        }
+        file_put_contents('PokemonData.json', json_encode($out, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        echo json_encode($out, JSON_UNESCAPED_UNICODE);
         $conn->close();
         exit;
     }

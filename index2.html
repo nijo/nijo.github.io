@@ -1,369 +1,233 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Pokémon TCG Pocket Database</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
-    <!-- Google Fonts for a modern look -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;400&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<nav class="navbar navbar-expand-lg">
-        <div class="container d-flex flex-column">
-            <div class="mb-2 d-flex">
-            <input type="text" id="searchInput" class="form-control" placeholder="Search cards...">
-            <select id="searchField" class="form-select" style="width: 150px; margin-left: 10px;">
-                <option value="all">All Fields</option>
-                <option value="name">Name</option>
-                <option value="id">ID</option>
-                <option value="evolvesFrom">Evolves From</option>
-                <option value="evolvesInto">Evolves Into</option>
-            </select>
+    <head>
+        <title>Pokémon TCG Pocket Database</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap CSS CDN -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- DataTables CSS -->
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+        <!-- Google Fonts for a modern look -->
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;400&display=swap" rel="stylesheet">
+        <!-- Font Awesome for icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container d-flex flex-column">
+                <div class="mb-2 d-flex">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search cards...">
+                    <select id="searchField" class="form-select" style="width: 150px; margin-left: 10px;">
+                        <option value="all">All Fields</option>
+                        <option value="name">Name</option>
+                        <option value="id">ID</option>
+                        <option value="evolvesFrom">Evolves From</option>
+                        <option value="evolvesInto">Evolves Into</option>
+                    </select>
+                </div>
+                <div class="mb-2 container-fluid" id="Filters" style='display:none'>
+                    <div class="btn-group" role="group" aria-label="Set filter">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Set</button>
+                        <ul id="setFilter" class="dropdown-menu">
+                        <!-- Checkboxes will be populated dynamically -->
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Pack filter">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Pack</button>
+                        <ul id="packFilter" class="dropdown-menu">
+                        <!-- Checkboxes will be populated dynamically -->
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="card Type filter">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Card Type</button>
+                        <ul id="cardTypeFilter" class="dropdown-menu">
+                        <!-- Checkboxes will be populated dynamically -->
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Stage filter">
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Stage</button>
+                        <ul id="stageFilter" class="dropdown-menu">
+                        <!-- Checkboxes will be populated dynamically -->
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Rarity filter">
+                        <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Rarity</button>
+                        <ul id="rarityFilter" class="dropdown-menu">
+                        <!-- Checkboxes will be populated dynamically -->
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Type filter">
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Type</button>
+                        <ul id="typeFilter" class="dropdown-menu">
+                        <!-- Checkboxes will be populated dynamically -->
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Weakness filter">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Weakness</button>
+                        <ul id="weaknessFilter" class="dropdown-menu">
+                        <!-- Checkboxes will be populated dynamically -->
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="retreat Cost filter">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Retreat</button>
+                        <ul id="retreatCostFilter" class="dropdown-menu">
+                        <!-- Checkboxes will be populated dynamically -->
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Ability filter">
+                        <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Ability</button>
+                        <ul id="abilityFilter" class="dropdown-menu">
+                        <!-- Checkboxes will be populated dynamically -->
+                        </ul>
+                    </div>
+                </div>
+                <div style='width:100%;text-align:center'>
+                    <div class="btn-group" role="group" aria-label="Set filter">
+                        <button type="button" onclick="divToggle()" class="btn btn-secondary">Filters</button>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Sort options">
+                        <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Sort By</button>
+                        <ul id="sortOptions" class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('id', 'asc')">Id (Asc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('id', 'desc')">Id (Desc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('name', 'asc')">Name (Asc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('name', 'desc')">Name (Desc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('attack', 'asc')">Attack (Asc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('attack', 'desc')">Attack (Desc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('hp', 'asc')">HP (Asc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('hp', 'desc')">HP (Desc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('count', 'asc')">Count (Asc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('count', 'desc')">Count (Desc)</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="mb-2 container-fluid" id="Filters" style='display:none'>
-                <div class="btn-group" role="group" aria-label="Set filter">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Set</button>
-                    <ul id="setFilter" class="dropdown-menu">
-                        <!-- Checkboxes will be populated dynamically -->
-                    </ul>
-                </div>
-                <div class="btn-group" role="group" aria-label="Pack filter">
-                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Pack</button>
-                    <ul id="packFilter" class="dropdown-menu">
-                        <!-- Checkboxes will be populated dynamically -->
-                    </ul>
-                </div>
-                <div class="btn-group" role="group" aria-label="card Type filter">
-                    <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Card Type</button>
-                    <ul id="cardTypeFilter" class="dropdown-menu">
-                        <!-- Checkboxes will be populated dynamically -->
-                    </ul>
-                </div>
-                <div class="btn-group" role="group" aria-label="Stage filter">
-                    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Stage</button>
-                    <ul id="stageFilter" class="dropdown-menu">
-                        <!-- Checkboxes will be populated dynamically -->
-                    </ul>
-                </div>
-                <div class="btn-group" role="group" aria-label="Rarity filter">
-                    <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Rarity</button>
-                    <ul id="rarityFilter" class="dropdown-menu">
-                        <!-- Checkboxes will be populated dynamically -->
-                    </ul>
-                </div>
-                <div class="btn-group" role="group" aria-label="Type filter">
-                    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Type</button>
-                    <ul id="typeFilter" class="dropdown-menu">
-                        <!-- Checkboxes will be populated dynamically -->
-                    </ul>
-                </div>
-                <div class="btn-group" role="group" aria-label="Weakness filter">
-                    <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Weakness</button>
-                    <ul id="weaknessFilter" class="dropdown-menu">
-                        <!-- Checkboxes will be populated dynamically -->
-                    </ul>
-                </div>
-                <div class="btn-group" role="group" aria-label="retreat Cost filter">
-                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Retreat</button>
-                    <ul id="retreatCostFilter" class="dropdown-menu">
-                        <!-- Checkboxes will be populated dynamically -->
-                    </ul>
-                </div>
-                <div class="btn-group" role="group" aria-label="Ability filter">
-                    <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Ability</button>
-                    <ul id="abilityFilter" class="dropdown-menu">
-                        <!-- Checkboxes will be populated dynamically -->
-                    </ul>
-                </div>
-            </div>
-            <div style='width:100%;text-align:center'>
-                <div class="btn-group" role="group" aria-label="Set filter">
-                    <button type="button" onclick="divToggle()" class="btn btn-secondary">Filters</button>
-                </div>
-                <div class="btn-group" role="group" aria-label="Set filter">
-                    <button type="button" onclick="openModal()" class="btn btn-light" style="color: black;">Count/Sum</button>
-                </div>
-                <div class="btn-group" role="group" aria-label="Sort options">
-                    <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Sort By</button>
-                    <ul id="sortOptions" class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#" onclick="sortImages('id', 'asc')">Id (Asc)</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="sortImages('id', 'desc')">Id (Desc)</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="sortImages('name', 'asc')">Name (Asc)</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="sortImages('name', 'desc')">Name (Desc)</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="sortImages('attack', 'asc')">Attack (Asc)</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="sortImages('attack', 'desc')">Attack (Desc)</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="sortImages('hp', 'asc')">HP (Asc)</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="sortImages('hp', 'desc')">HP (Desc)</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="sortImages('count', 'asc')">Count (Asc)</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="sortImages('count', 'desc')">Count (Desc)</a></li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-    </nav>
-    <div class="modal" id="imageModal" style="display: none">
-        <div class="card shadow">
+        </nav>
+        <div class="modal" id="imageModal">
             <button id="closeButton" class="btn">
                 <i class="fa-solid fa-window-close"></i>
             </button>
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped align-middle" id="setRarityTable">
-                    <thead>
-                        <tr id="setRarityHeader">
-                            <th>Set \ Rarity</th>
-                            <!-- Rarity columns will be inserted here -->
-                        </tr>
-                    </thead>
-                    <tbody id="setRarityBody">
-                        <!-- Rows will be inserted by JS -->
-                    </tbody>
-                </table>
+            <button id="prevButton" class="btn" style="position: absolute; left: 0px;">
+                <i class="fa-solid fa-caret-left"></i>
+            </button>
+            <div class="col">
+                <img id="modalImage" alt="Full-size image">
+            </div>
+            <div class="col">
+                <div id="modalDescription"></div>
+            </div>
+            <button id="nextButton" class="btn" style="position: absolute; right: 0px;">
+                <i class="fa-solid fa-caret-right"></i>
+            </button>
+        </div>
+        <div class="container-lg my-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-striped align-middle" id="pokemonTable">
+                            <thead>
+                                <tr>
+                                    <th>slNo</th>
+                                    <th>Name</th>
+                                    <th>Rarity</th>
+                                    <th>Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Data will be loaded here by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-<div class="container-lg my-4">
-    <div class="card shadow">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped align-middle" id="pokemonTable">
-                    <thead>
-                        <tr>
-                            <th>slNo</th>
-                            <th>Name</th>
-                            <th>T</th>
-                            <th>W</th>
-                            <th>RC</th>
-                            <th>Rarity</th>
-                            <th>Count</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Data will be loaded here by JS -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- jQuery and DataTables JS -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
-<script src="script.js"></script>
-<script>
-
-function renderData(data) {
-    let html = '';
-    data.forEach(row => {
-        // Rarity images and text
-        let rarityText = '';
-        let rarityImgs = '';
-        let type = '';
-        let weakness = '';
-        if (Array.isArray(row.rarity)) {
-            row.rarity.forEach(r => {
-                rarityText += r + ', ';
-                rarityImgs += `<img src="Rarity/${r}.png" alt="${r}" style="width:14px">`;
-            });
-        }
-        if(row.type == 'NA' || row.type == ''){
-            type = `<label>${row.type}</label>`;
-        }
-        else{  
-            type = `<img src="Type/${row.type}.png" alt="${row.type}" style="width: 14px;">`;
-        }
-        if(row.weakness == 'NA' || row.weakness == ''){
-            weakness = `<label>${row.weakness}</label>`;
-        }
-        else{
-            weakness = `<img src="Type/${row.weakness}.png" alt="${row.weakness}" style="width: 14px;">`;
-        }
-        html += `<tr>
-            <td class="nowrap">${row.id || ''}</td>
-            <td>
-                <span class="badge-type name-search">${row.name || ''}</span>
-            </td>
-            <td>
-                ${type}
-                <span class="d-none type-search">${(row.type || '')}</span>
-            </td>
-            <td>
-                ${weakness}
-                <span class="d-none weakness-search">${(row.weakness || '')}</span>
-            </td>
-            <td>
-                <span class="badge-type retreatCost-search">${(row.retreatCost || 0)}</span>
-            </td>
-            <td>
-                ${rarityImgs}
-                <span class="d-none rarity-search">${rarityText.trim()}</span>
-            </td>
-            <td>
-                <span class="count-value">${row.count || 0}</span>
-                <select class="form-select form-select-sm d-none count-input" style="width:auto;display:inline-block;">
-                    ${[...Array(26).keys()].map(i => `<option value="${i}" ${i == (row.count || 0) ? 'selected' : ''}>${i}</option>`).join('')}
-                </select>
-                <button class="btn btn-link btn-sm p-0 edit-btn" title="Edit"><i class="fa fa-pencil-alt"></i></button>
-                <button class="btn btn-link btn-sm p-0 save-btn d-none" title="Save"><i class="fa fa-check"></i></button>
-                <input type="hidden" class="row-slno" value="${row.id || ''}">
-                <span class="d-none count-search">${row.count || 0}</span>
-            </td>
-        </tr>`;
-    });
-    $('#pokemonTable tbody').html(html);
-}
-
-function renderSetRarityTable(data) {
-    // Build header
-    let headerHtml = '<th>Set \\ Rarity</th>';
-    rarities.forEach(rarity => {
-        // If rarity is a comma-separated string, split and show images
-        let rarityImgs = '';
-        let rarityArr = rarity.split(',').map(r => r.trim()).filter(r => r);
-        rarityArr.forEach(r => {
-            rarityImgs += `<img src="Rarity/${r}.png" alt="${r}" style="width:18px" title="${r}"> `;
-        });
-        headerHtml += `<th style="background-color:#ff0000;color:#ffffff;font-weight:bold;">${rarityImgs}</th>`;
-    });
-    $('#setRarityHeader').html(headerHtml);
-
-    // Build body
-    let bodyHtml = '';
-    sets.forEach(set => {
-        bodyHtml += `<tr><td style="background-color:#0000ff;color:#ffffff;font-weight:bold;">${set}</td>`;
-        rarities.forEach(rarity => {
-            // Count cards for this set and rarity
-            const total = data.filter(row => row.set === set && row.rarity.toString() === rarity.toString()).length;
-            const available = data.filter(row => row.count > 0 && row.set === set && row.rarity.toString() === rarity.toString()).length;
-            const duplicate = data.filter(row => row.count > 1 && row.set === set && row.rarity.toString() === rarity.toString()).length;
-            bodyHtml += `<td>${total}-${available}-${duplicate}</td>`;
-        });
-        bodyHtml += '</tr>';
-    });
-    $('#setRarityBody').html(bodyHtml);
-}
-
-async function loadTableData() {
-    try {
-        if (typeof localStorage['groupedData'] == 'undefined'){
-            const response = await fetch("PokemonData.json");
-            const data = await response.json();
-            data.forEach(row => {
-                const [id, name, rarity, pack, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count] = [ row.slNo, row.name, row.rarity, row.pack, row.type, row.imageURL, row.stage, row.hp, row.weakness, row.evolvesFrom, row.evolvesInto, row.cardType, row.retreatCost, row.set, row.info, row.abilityName, row.abilityDescription, row.attackInfo, row.count ];
-                groupedData.push({ id, name, pack, rarity, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count });
-            });
-            localStorage['groupedData'] = JSON.stringify(groupedData);
-        }
-        else{
-            groupedData = JSON.parse(localStorage['groupedData']); 
-        }
-        groupedData.forEach(row => {
-            const [id, name, rarity, pack, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count] = [ row.id, row.name, row.rarity, row.pack, row.type, row.imageUrl, row.stage, row.hp, row.weakness, row.evolvesFrom, row.evolvesInto, row.cardType, row.retreatCost, row.set, row.info, row.abilityName, row.abilityDescription, row.attackInfo, row.count];
-            if (set) sets.add(set);
-            if (rarity.toString()) rarities.add(rarity.toString());
-            if (type) types.add(type);
-            if (stage) stages.add(stage);
-            if (weakness) weaknesses.add(weakness);
-            if (cardType) cardTypes.add(cardType);
-            if (pack) packs.add(pack);
-            if (retreatCost) retreatCosts.add(retreatCost);
-            abilities.add('Yes');
-        });
-
-        SearchedData = groupedData;
-        renderData(groupedData);
-        
-        populateFilterCheckboxes('setFilter', sets, 'set');
-        populateFilterCheckboxes('rarityFilter', rarities, 'rarity');
-        populateFilterCheckboxes('typeFilter', types, 'type');
-        populateFilterCheckboxes('stageFilter', stages, 'stage');
-        populateFilterCheckboxes('weaknessFilter', weaknesses, 'weakness');
-        populateFilterCheckboxes('cardTypeFilter', cardTypes, 'cardType');
-        populateFilterCheckboxes('packFilter', packs, 'pack');
-        populateFilterCheckboxes('retreatCostFilter', retreatCosts, 'retreatCost');
-        populateFilterCheckboxes('abilityFilter', abilities, 'ability');
-
-    } catch (e) {
-        $('#pokemonTable tbody').html('<tr><td colspan="4" class="text-center text-danger">Failed to load data.</td></tr>');
-    }
-}
-
-// Toggle edit/save for Count
-    $('#pokemonTable').on('click', '.edit-btn', function() {
-        var td = $(this).closest('td');
-        td.find('.count-value').addClass('d-none');
-        td.find('.count-input').removeClass('d-none');
-        td.find('.edit-btn').addClass('d-none');
-        td.find('.save-btn').removeClass('d-none');
-    });
-
-    $('#pokemonTable').on('click', '.save-btn', function() {
-        var td = $(this).closest('td');
-        var newCount = td.find('.count-input').val();
-        var slNo = td.find('.row-slno').val();
-        var btn = $(this);
-
-        // AJAX to save to DB (PUT request)
-        $.ajax({
-            url: 'https://nijojob.infinityfreeapp.com/db.php',
-            method: 'POST',
-            data: { slNo: slNo, count: newCount },
-            success: function(response) {
-                td.find('.count-value').text(newCount).removeClass('d-none');
-                td.find('.count-input').addClass('d-none');
-                td.find('.edit-btn').removeClass('d-none');
-                td.find('.save-btn').addClass('d-none');
-            },
-            error: function(xhr){
-                alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- jQuery and DataTables JS -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+        <script src="script.js"></script>
+        <script>
+            //Render the table.
+            function renderData(data) {
+                let html = '';
+                data.forEach((item, index) => {
+                    // Rarity images and text
+                    let rarityText = '';
+                    let rarityImgs = '';
+                    let type = '';
+                    let weakness = '';
+                    if (Array.isArray(item.rarity)) {
+                        item.rarity.forEach(r => {
+                            rarityText += r + ', ';
+                            rarityImgs += `<img src="Rarity/${r}.png" alt="${r}" style="width:14px">`;
+                        });
+                    }
+                    html += `<tr onclick = openModal(${index})>
+                            <td class="nowrap">${item.id || ''}</td>
+                            <td>
+                                <span class="badge-type name-search">${item.name || ''}</span>
+                            </td>
+                            <td>
+                                ${rarityImgs}
+                                <span class="d-none rarity-search">${rarityText.trim()}</span>
+                            </td>
+                            <td>
+                                <span class="count-value">${item.count || 0}</span>
+                                <select class="form-select form-select-sm d-none count-input" style="width:auto;display:inline-block;">
+                                    ${[...Array(26).keys()].map(i => `<option value="${i}" ${i == (item.count || 0) ? 'selected' : ''}>${i}</option>`).join('')}
+                                </select>
+                                <button class="btn btn-link btn-sm p-0 edit-btn" title="Edit"><i class="fa fa-pencil-alt"></i></button>
+                                <button class="btn btn-link btn-sm p-0 save-btn d-none" title="Save"><i class="fa fa-check"></i></button>
+                                <input type="hidden" class="row-slno" value="${item.id || ''}">
+                                <span class="d-none count-search">${item.count || 0}</span>
+                            </td>
+                        </tr>`;
+                });
+                $('#pokemonTable tbody').html(html);
             }
-        });
-    });
 
+            //Toggle edit/save for Count
+            $('#pokemonTable').on('click', '.edit-btn', function() {
+                var td = $(this).closest('td');
+                td.find('.count-value').addClass('d-none');
+                td.find('.count-input').removeClass('d-none');
+                td.find('.edit-btn').addClass('d-none');
+                td.find('.save-btn').removeClass('d-none');
+            });
 
+            $('#pokemonTable').on('click', '.save-btn', function() {
+                var td = $(this).closest('td');
+                var newCount = td.find('.count-input').val();
+                var slNo = td.find('.row-slno').val();
+                var btn = $(this);
+                var groupedData = [];
 
-$(document).ready(function() {
-    loadTableData();
-});
-
-function divToggle(){
-        var x = document.getElementById('Filters');
-        x.style.display === 'none'?x.style.display='block':x.style.display='none';
-    }
-function openModal() {
-    renderSetRarityTable(groupedData);
-    var x = document.getElementById('imageModal');
-    x.style.display === 'none'?x.style.display='block':x.style.display='none';
-}
-$('#sqlForm').on('submit', function(e) {
-    e.preventDefault();
-    const where = $('#whereInput').val().trim();
-    if (!where) {
-        $('#whereOutput').val('Please enter a SQL query.');
-        return;
-    }
-    $.ajax({
-        url: 'db.php',
-        method: 'GET',
-        data: { custom_where: where },
-        success: function(response) {
-            $('#whereOutput').val("Count: " + response.count + " and " + "Sum: " + response.sum);
-        },
-        error: function() {
-            $('#whereOutput').val('Error running query.');
-        }
-    });
-});
-</script>
-</body>
+                // AJAX to save to DB (PUT request)
+                $.ajax({
+                    url: 'https://nijojob.infinityfreeapp.com/db.php',
+                    method: 'POST',
+                    data: { slNo: slNo, count: newCount },
+                    success: function(response) {
+                        td.find('.count-value').text(newCount).removeClass('d-none');
+                        td.find('.count-input').addClass('d-none');
+                        td.find('.edit-btn').removeClass('d-none');
+                        td.find('.save-btn').addClass('d-none');
+                        response.forEach(row => {
+                            const [id, name, rarity, pack, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count] = [ row.slNo, row.name, row.rarity, row.pack, row.type, row.imageURL, row.stage, row.hp, row.weakness, row.evolvesFrom, row.evolvesInto, row.cardType, row.retreatCost, row.set, row.info, row.abilityName, row.abilityDescription, row.attackInfo, row.count ];
+                            groupedData.push({ id, name, pack, rarity, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count });
+                        });
+                        renderData(groupedData);
+                    },
+                    error: function(xhr){
+                        alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+                    }
+                });
+            });
+            
+    </script>
+    </body>
 </html>

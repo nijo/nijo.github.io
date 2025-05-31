@@ -1,295 +1,154 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Pokémon TCG Pocket Gallery</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container d-flex flex-column">
-            <div class="mb-2 d-flex">
-            <input type="text" id="searchInput" class="form-control" placeholder="Search cards...">
-            <select id="searchField" class="form-select" style="width: 150px; margin-left: 10px;">
-                <option value="all">All Fields</option>
-                <option value="name">Name</option>
-                <option value="id">ID</option>
-                <option value="evolvesFrom">Evolves From</option>
-                <option value="evolvesInto">Evolves Into</option>
-            </select>
+        <title>Pokémon TCG Pocket Gallery</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container d-flex flex-column">
+                <div class="mb-2 d-flex">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search cards...">
+                    <select id="searchField" class="form-select" style="width: 150px; margin-left: 10px;">
+                        <option value="all">All Fields</option>
+                        <option value="name">Name</option>
+                        <option value="id">ID</option>
+                        <option value="evolvesFrom">Evolves From</option>
+                        <option value="evolvesInto">Evolves Into</option>
+                    </select>
+                </div>
+                <div class="mb-2 container-fluid" id="Filters" style='display:none'>
+                    <div class="btn-group" role="group" aria-label="Set filter">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Set</button>
+                        <ul id="setFilter" class="dropdown-menu">
+                            <!-- Checkboxes will be populated dynamically -->
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Pack filter">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Pack</button>
+                        <ul id="packFilter" class="dropdown-menu">
+                            <!-- Checkboxes will be populated dynamically -->
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="card Type filter">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Card Type</button>
+                        <ul id="cardTypeFilter" class="dropdown-menu">
+                            <!-- Checkboxes will be populated dynamically -->
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Stage filter">
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Stage</button>
+                        <ul id="stageFilter" class="dropdown-menu">
+                            <!-- Checkboxes will be populated dynamically -->
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Rarity filter">
+                        <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Rarity</button>
+                        <ul id="rarityFilter" class="dropdown-menu">
+                            <!-- Checkboxes will be populated dynamically -->
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Type filter">
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Type</button>
+                        <ul id="typeFilter" class="dropdown-menu">
+                            <!-- Checkboxes will be populated dynamically -->
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Weakness filter">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Weakness</button>
+                        <ul id="weaknessFilter" class="dropdown-menu">
+                            <!-- Checkboxes will be populated dynamically -->
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="retreat Cost filter">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Retreat</button>
+                        <ul id="retreatCostFilter" class="dropdown-menu">
+                            <!-- Checkboxes will be populated dynamically -->
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Ability filter">
+                        <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Ability</button>
+                        <ul id="abilityFilter" class="dropdown-menu">
+                            <!-- Checkboxes will be populated dynamically -->
+                        </ul>
+                    </div>
+                </div>
+                <div style='width:100%;text-align:center'>
+                    <div class="btn-group" role="group" aria-label="Set filter">
+                        <button type="button" onclick="divToggle()" class="btn btn-secondary">Filters</button>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Sort options">
+                        <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Sort By</button>
+                        <ul id="sortOptions" class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('id', 'asc')">Id (Asc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('id', 'desc')">Id (Desc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('name', 'asc')">Name (Asc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('name', 'desc')">Name (Desc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('attack', 'asc')">Attack (Asc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('attack', 'desc')">Attack (Desc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('hp', 'asc')">HP (Asc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('hp', 'desc')">HP (Desc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('count', 'asc')">Count (Asc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('count', 'desc')">Count (Desc)</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="mb-2 container-fluid" id="Filters" style='display:none'>
-                <div class="btn-group" role="group" aria-label="Set filter">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Set</button>
-                    <ul id="setFilter" class="dropdown-menu">
-                        <!-- Checkboxes will be populated dynamically -->
-                    </ul>
+        </nav>
+        <div class="container-lg my-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div id="Gallery" class="container-fluid"></div>
                 </div>
-                <div class="btn-group" role="group" aria-label="Pack filter">
-                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Pack</button>
-                    <ul id="packFilter" class="dropdown-menu">
-                        <!-- Checkboxes will be populated dynamically -->
-                    </ul>
-                </div>
-                <div class="btn-group" role="group" aria-label="card Type filter">
-                    <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Card Type</button>
-                    <ul id="cardTypeFilter" class="dropdown-menu">
-                        <!-- Checkboxes will be populated dynamically -->
-                    </ul>
-                </div>
-                <div class="btn-group" role="group" aria-label="Stage filter">
-                    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Stage</button>
-                    <ul id="stageFilter" class="dropdown-menu">
-                        <!-- Checkboxes will be populated dynamically -->
-                    </ul>
-                </div>
-                <div class="btn-group" role="group" aria-label="Rarity filter">
-                    <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Rarity</button>
-                    <ul id="rarityFilter" class="dropdown-menu">
-                        <!-- Checkboxes will be populated dynamically -->
-                    </ul>
-                </div>
-                <div class="btn-group" role="group" aria-label="Type filter">
-                    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Type</button>
-                    <ul id="typeFilter" class="dropdown-menu">
-                        <!-- Checkboxes will be populated dynamically -->
-                    </ul>
-                </div>
-                <div class="btn-group" role="group" aria-label="Weakness filter">
-                    <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Weakness</button>
-                    <ul id="weaknessFilter" class="dropdown-menu">
-                        <!-- Checkboxes will be populated dynamically -->
-                    </ul>
-                </div>
-                <div class="btn-group" role="group" aria-label="retreat Cost filter">
-                    <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Retreat</button>
-                    <ul id="retreatCostFilter" class="dropdown-menu">
-                        <!-- Checkboxes will be populated dynamically -->
-                    </ul>
-                </div>
-                <div class="btn-group" role="group" aria-label="Ability filter">
-                    <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Ability</button>
-                    <ul id="abilityFilter" class="dropdown-menu">
-                        <!-- Checkboxes will be populated dynamically -->
-                    </ul>
-                </div>
-            </div>
-            <div style='width:100%;text-align:center'>
-                <div class="btn-group" role="group" aria-label="Set filter">
-                    <button type="button" onclick="divToggle()" class="btn btn-secondary">Filters</button>
-                </div>
-                <div class="btn-group" role="group" aria-label="Sort options">
-                    <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Sort By</button>
-                    <ul id="sortOptions" class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#" onclick="sortImages('id', 'asc')">Id (Asc)</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="sortImages('id', 'desc')">Id (Desc)</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="sortImages('name', 'asc')">Name (Asc)</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="sortImages('name', 'desc')">Name (Desc)</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="sortImages('attack', 'asc')">Attack (Asc)</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="sortImages('attack', 'desc')">Attack (Desc)</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="sortImages('hp', 'asc')">HP (Asc)</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="sortImages('hp', 'desc')">HP (Desc)</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="sortImages('count', 'asc')">Count (Asc)</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="sortImages('count', 'desc')">Count (Desc)</a></li>
-                    </ul>
-                </div>
-            </div>
+            </div> 
         </div>
-    </nav>
-    <div class="container-lg my-4">
-        <div class="card shadow">
-            <div class="card-body">
-                <div id="Gallery" class="container-fluid"></div>
+        <!-- Modal -->
+        <div class="modal" id="imageModal">
+            <button id="closeButton" class="btn">
+                <i class="fa-solid fa-window-close"></i>
+            </button>
+            <button id="prevButton" class="btn" style="position: absolute; left: 0px;">
+                <i class="fa-solid fa-caret-left"></i>
+            </button>
+            <div class="col">
+                <img id="modalImage" alt="Full-size image">
             </div>
-        </div> 
-    </div>
-    <!-- Modal -->
-    <div class="modal" id="imageModal">
-        <button id="closeButton" class="btn">
-            <i class="fa-solid fa-window-close"></i>
-        </button>
-        <button id="prevButton" class="btn" style="position: absolute; left: 0px;">
-            <i class="fa-solid fa-caret-left"></i>
-        </button>
-        <div class="col">
-            <img id="modalImage" alt="Full-size image">
+            <div class="col">
+                <div id="modalDescription"></div>
+            </div>
+            <button id="nextButton" class="btn" style="position: absolute; right: 0px;">
+                <i class="fa-solid fa-caret-right"></i>
+            </button>
         </div>
-        <div class="col">
-            <div id="modalDescription"></div>
-        </div>
-        <button id="nextButton" class="btn" style="position: absolute; right: 0px;">
-            <i class="fa-solid fa-caret-right"></i>
-        </button>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
-    <script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="script.js"></script>
+        <script>
+            //Render the gallery.
+            function renderData(groupedData) {
+                const galleryContainer = document.getElementById('Gallery');
 
-    async function loadAndGroupImages() {
-        try {
-            if (typeof localStorage['groupedData'] == 'undefined'){
-                const response = await fetch("PokemonData.json");
-                const data = await response.json();
-                data.forEach(row => {
-                    const [id, name, rarity, pack, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count] = [ row.slNo, row.name, row.rarity, row.pack, row.type, row.imageURL, row.stage, row.hp, row.weakness, row.evolvesFrom, row.evolvesInto, row.cardType, row.retreatCost, row.set, row.info, row.abilityName, row.abilityDescription, row.attackInfo, row.count ];
-                    groupedData.push({ id, name, pack, rarity, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count });
+                galleryContainer.style.padding = '0px';
+                galleryContainer.innerHTML = ''; // Clear existing content
+
+                groupedData.forEach((item, index) => {
+                    const photoDiv = document.createElement('div');
+                    photoDiv.classList.add('photo');
+
+                    const img = document.createElement('img');
+                    img.src = item.imageUrl;
+                    img.alt = item.id + " " + item.name;
+                    img.loading = "lazy";
+                    img.onclick = () => openModal(index);
+
+                    photoDiv.appendChild(img);
+                    galleryContainer.appendChild(photoDiv);
                 });
-                localStorage['groupedData'] = JSON.stringify(groupedData);
             }
-            else{
-                groupedData = JSON.parse(localStorage['groupedData']); 
-            }
-            groupedData.forEach(row => {
-                const [id, name, rarity, pack, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count] = [ row.id, row.name, row.rarity, row.pack, row.type, row.imageUrl, row.stage, row.hp, row.weakness, row.evolvesFrom, row.evolvesInto, row.cardType, row.retreatCost, row.set, row.info, row.abilityName, row.abilityDescription, row.attackInfo, row.count];
-                if (set) sets.add(set);
-                if (rarity.toString()) rarities.add(rarity.toString());
-                if (type) types.add(type);
-                if (stage) stages.add(stage);
-                if (weakness) weaknesses.add(weakness);
-                if (cardType) cardTypes.add(cardType);
-                if (pack) packs.add(pack);
-                if (retreatCost) retreatCosts.add(retreatCost);
-                abilities.add('Yes');
-            });
-            SearchedData = groupedData;
-            renderData(groupedData);
-            
-            populateFilterCheckboxes('setFilter', sets, 'set');
-            populateFilterCheckboxes('rarityFilter', rarities, 'rarity');
-            populateFilterCheckboxes('typeFilter', types, 'type');
-            populateFilterCheckboxes('stageFilter', stages, 'stage');
-            populateFilterCheckboxes('weaknessFilter', weaknesses, 'weakness');
-            populateFilterCheckboxes('cardTypeFilter', cardTypes, 'cardType');
-            populateFilterCheckboxes('packFilter', packs, 'pack');
-            populateFilterCheckboxes('retreatCostFilter', retreatCosts, 'retreatCost');
-            populateFilterCheckboxes('abilityFilter', abilities, 'ability');
-
-        } catch (error) {
-            console.error('Error loading or processing the Webpage:', error);
-        }
-    }
-
-    function renderData(groupedData) {
-        const galleryContainer = document.getElementById('Gallery');
-    
-        // Fade out the gallery
-        galleryContainer.style.opacity = 0;
-        galleryContainer.style.padding = '0px';
-        setTimeout(() => {
-            galleryContainer.innerHTML = ''; // Clear existing content
-
-            groupedData.forEach((item, index) => {
-                const photoDiv = document.createElement('div');
-                photoDiv.classList.add('photo');
-
-                const img = document.createElement('img');
-                img.src = item.imageUrl;
-                img.alt = item.id + " " + item.name;
-                img.loading = "lazy";
-                img.onclick = () => openModal(index);
-
-                photoDiv.appendChild(img);
-                galleryContainer.appendChild(photoDiv);
-            });
-
-            // Fade in the gallery
-            galleryContainer.style.opacity = 1;
-        }, 300); // Delay to allow fade-out animation
-    }
-
-    // Modal section
-    
-    function openModal(index) {
-        const pokemon = SearchedData[index];
-        const modal = document.getElementById('imageModal');
-        const modalImage = document.getElementById('modalImage');
-        const modalDescription = document.getElementById('modalDescription');
-        let type = '';
-        let weakness = '';
-        modalImage.src = pokemon.imageUrl;
-        modalImage.alt = pokemon.name;
-        const attacks = pokemon.attackInfo.map(function(a) {
-            return `<li><strong data-bs-toggle="tooltip" data-bs-html="true" title="${a.attackExtra ? '<em>' + a.attackExtra + '</em>' : ''}">
-                ${a.attackExtra ? '<u>' + a.attackName + '</u>' : a.attackName}</strong> - ${a.attackDamage || '00'} (${a.attackCost.map(b => `<img src="Type/${b}.png" style="width:14px">`).join('')})</li>`;
-        }).join('');
-        const rarity = pokemon.rarity.map(a => `<img src="Rarity/${a}.png" style="width:14px">`).join('');
-        let evolvesInto = '';
-        let temp = JSON.parse(JSON.stringify(pokemon.evolvesInto));
-        if (temp && temp.length !== 0) {
-            if (Array.isArray(temp)) {
-                evolvesInto = temp.join(', ');
-            } 
-            else {
-                evolvesInto = temp;
-            }
-        }
-        if(pokemon.type == 'NA' || pokemon.type == ''){
-            type = `<label>${pokemon.type}</label>`;            
-        }
-        else{
-            type = `<img src="Type/${pokemon.type}.png" alt="${pokemon.type}" style="width: 14px;">`;
-        }
-        if(pokemon.weakness == 'NA' || pokemon.weakness == ''){
-            weakness = `<label>${pokemon.weakness}</label>`;
-        }
-        else{
-            weakness = `<img src="Type/${pokemon.weakness}.png" alt="${pokemon.weakness}" style="width: 14px;">`;
-        }
-        modalDescription.innerHTML = `
-            <div class="row"><div class='col'><strong data-bs-toggle="tooltip" data-bs-html="true" title="<em>${pokemon.info}</em>">${pokemon.name}</strong></div></div>
-            <div class="row"><div class='col-5'><strong>ID:</strong></div><div class='col-7'>${pokemon.id}</div></div>
-            <div class="row"><div class='col-5'><strong>Rarity:</strong></div><div class='col-7'>${rarity}</div></div>
-            <div class="row"><div class='col-5'><strong>Type:</strong></div><div class='col-7'>${type}</div></div>
-            <div class="row"><div class='col-5'><strong>HP:</strong></div><div class='col-7'>${pokemon.hp}</div></div>
-            <div class="row"><div class='col-5'><strong>Stage:</strong></div><div class='col-7'><span data-bs-toggle="tooltip" data-bs-html="true" title="<em>Evolves From: ${pokemon.evolvesFrom}</em> || <em>Evolves To: ${evolvesInto}</em>">${pokemon.stage}</span></div></div>
-            <div class="row"><div class='col-5'><strong>Card Type:</strong></div><div class='col-7'>${pokemon.cardType}</div></div>
-            <div class="row"><div class='col-5'><strong>Weakness:</strong></div><div class='col-7'>${weakness}</div></div>
-            <div class="row"><div class='col-5'><strong>Retreat Cost:</strong></div><div class='col-7'>${pokemon.retreatCost}</div></div>
-            <div class="row"><div class='col-5'><strong>Set:</strong></div><div class='col-7'>${pokemon.set}</div></div>
-            <div class="row"><div class='col-5'><strong>Pack:</strong></div><div class='col-7'>${pokemon.pack}</div></div>
-            ${pokemon.abilityName ? `<div class="row"><div class='col-5'><strong>Ability:</strong></div><div class='col-7'><span data-bs-toggle="tooltip" data-bs-html="true" title="<em>${pokemon.abilityDescription}</em>">${pokemon.abilityName}</span></div></div>` : ''}
-            <div class="row"><div class='col-5'><strong>Attacks:</strong></div><div class='col-7'>${attacks}</div></div>
-        `;
-
-        if(window.innerWidth < 1000)
-            modal.style.display = 'block';
-        else
-            modal.style.display = 'flex';
-
-        modalImage.style.height = modalImage.naturalHeight.toString() + 'px';
-        modalImage.style.width = modalImage.naturalWidth.toString() + 'px';
-        modalDescription.style.height = modalImage.naturalHeight.toString() + 'px';
-        modalDescription.style.width = (modalImage.naturalWidth * 1.25).toString() + 'px';
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
-        if(pokemon.abilityName == '')
-        {
-            document.querySelector('#modalDescription .row:last-child .col-7').style.height = ((512/14.5)*2.5).toString() + 'px';
-        }
-        currentImageIndex = index;
-    }
-
-    function showNextImage() {
-        currentImageIndex = (currentImageIndex + 1);
-        openModal(currentImageIndex);
-    }
-
-    function showPreviousImage() {
-        currentImageIndex = (currentImageIndex - 1);
-        openModal(currentImageIndex);
-    }
-    
-    document.getElementById('nextButton').onclick = showNextImage;
-    document.getElementById('prevButton').onclick = showPreviousImage;
-    
-    loadAndGroupImages(); // Replace with the actual path to your CSV file
-
-</script>
-</body>
+    </script>
+    </body>
 </html>
