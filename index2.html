@@ -208,9 +208,9 @@
 
                 // AJAX to save to DB (PUT request)
                 $.ajax({
-                    url: 'https://nijojob.infinityfreeapp.com/db.php',
-                    method: 'POST',
-                    data: { slNo: slNo, count: newCount },
+                    url: 'https://ptcgp-d1101-default-rtdb.firebaseio.com/' + slNo + '.json',
+                    method: 'PATCH',
+                    data: { count: newCount },
                     success: function(response) {
                         td.find('.count-value').text(newCount).removeClass('d-none');
                         td.find('.count-input').addClass('d-none');
