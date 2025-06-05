@@ -15,7 +15,7 @@ let groupedData = [];
 let filteredData = [];
 let SearchedData = [];
 let searchQuery = "";
-let defaultCriteria = 'id';
+let defaultCriteria = 'slNo';
 let defaultOrder = 'asc';
 let flag = false;
 const sets = new Set();
@@ -39,7 +39,7 @@ function populateFilterCheckboxes(filterId, options, filterType) {
         input.type = 'checkbox';
         input.value = option;
         input.name = `${filterType}`;
-        input.id = `${filterType}${option}`;
+        input.slNo = `${filterType}${option}`;
         input.onclick = () => getFilters(filterId, filterType, option);
         if(filterType == 'type' || filterType == 'weakness'){
             if(option != 'NA'){
@@ -254,7 +254,7 @@ function openModal(index) {
     }
     modalDescription.innerHTML = `
         <div class="row"><div class='col'><strong data-bs-toggle="tooltip" data-bs-html="true" title="<em>${pokemon.info}</em>">${pokemon.name}</strong></div></div>
-        <div class="row"><div class='col-5'><strong>ID:</strong></div><div class='col-7'>${pokemon.id}</div></div>
+        <div class="row"><div class='col-5'><strong>slNo:</strong></div><div class='col-7'>${pokemon.slNo}</div></div>
         <div class="row"><div class='col-5'><strong>Rarity:</strong></div><div class='col-7'>${rarity}</div></div>
         <div class="row"><div class='col-5'><strong>Type:</strong></div><div class='col-7'>${type}</div></div>
         <div class="row"><div class='col-5'><strong>HP:</strong></div><div class='col-7'>${pokemon.hp}</div></div>
