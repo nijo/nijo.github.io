@@ -22,7 +22,7 @@
                     <select id="searchField" class="form-select" style="width: 150px; margin-left: 10px;">
                         <option value="all">All Fields</option>
                         <option value="name">Name</option>
-                        <option value="id">ID</option>
+                        <option value="slNo">slNo</option>
                         <option value="evolvesFrom">Evolves From</option>
                         <option value="evolvesInto">Evolves Into</option>
                     </select>
@@ -90,8 +90,8 @@
                     <div class="btn-group" role="group" aria-label="Sort options">
                         <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Sort By</button>
                         <ul id="sortOptions" class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" onclick="sortImages('id', 'asc')">Id (Asc)</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="sortImages('id', 'desc')">Id (Desc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('slNo', 'asc')">slNo (Asc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('slNo', 'desc')">slNo (Desc)</a></li>
                             <li><a class="dropdown-item" href="#" onclick="sortImages('name', 'asc')">Name (Asc)</a></li>
                             <li><a class="dropdown-item" href="#" onclick="sortImages('name', 'desc')">Name (Desc)</a></li>
                             <li><a class="dropdown-item" href="#" onclick="sortImages('attack', 'asc')">Attack (Asc)</a></li>
@@ -167,7 +167,7 @@
                         });
                     }
                     html += `<tr>
-                            <td onclick = openModal(${index}) class="nowrap">${item.id || ''}</td>
+                            <td onclick = openModal(${index}) class="nowrap">${item.slNo || ''}</td>
                             <td onclick = openModal(${index})>
                                 <span class="badge-type name-search">${item.name || ''}</span>
                             </td>
@@ -182,7 +182,7 @@
                                 </select>
                                 <button class="btn btn-link btn-sm p-0 edit-btn" title="Edit"><i class="fa fa-pencil-alt"></i></button>
                                 <button class="btn btn-link btn-sm p-0 save-btn d-none" title="Save"><i class="fa fa-check"></i></button>
-                                <input type="hidden" class="row-slno" value="${item.id || ''}">
+                                <input type="hidden" class="row-slno" value="${item.slNo || ''}">
                                 <span class="d-none count-search">${item.count || 0}</span>
                             </td>
                         </tr>`;
