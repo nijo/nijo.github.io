@@ -205,8 +205,8 @@ async function loadData(flag) {
             populateFilterCheckboxes('abilityFilter', abilities, 'ability');
         }
     }
-    catch (e) {More actions
-        alert("Failed to load data" + e);More actions
+    catch (e) {
+        alert("Failed to load data" + e);
     }
 }
 
