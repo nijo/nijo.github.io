@@ -97,7 +97,9 @@ document.getElementById('searchInput').addEventListener('input', function() {
 });
 
 //Apply search and dropdown filters
-function setFilters(currentFilters, searchQuery) {      
+function setFilters(currentFilters, searchQuery) {
+    console.log(currentFilters);
+    console.log(searchQuery);
     const selectedField = document.getElementById('searchField').value;
     filteredData = groupedData.filter(row => {
         if (
