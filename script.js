@@ -117,7 +117,9 @@ function setFilters(currentFilters, searchQuery) {
 
     SearchedData = filteredData;
     renderData(SearchedData);
-    showFilterAppliedPopup(SearchedData);
+    if(flag != true){
+        showFilterAppliedPopup(SearchedData);
+    }
 }
 
 //Sort images.
@@ -177,8 +179,6 @@ async function loadData(flag) {
             groupedData.push({ id, name, pack, rarity, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count });
         });
         
-        renderData(groupedData);
-        
         if(flag != true){
             SearchedData = groupedData;
             groupedData.forEach(row => {
@@ -203,6 +203,11 @@ async function loadData(flag) {
             populateFilterCheckboxes('packFilter', packs, 'pack');
             populateFilterCheckboxes('retreatCostFilter', retreatCosts, 'retreatCost');
             populateFilterCheckboxes('abilityFilter', abilities, 'ability');
+
+            renderData(groupedData);
+        }
+        else{
+            setFilters(currentFilters, searchQuery, flag)
         }
     }
     catch (e) {
