@@ -168,6 +168,7 @@ function divToggle(){
 document.getElementById('closeButton').onclick = closeModal;
 
 async function loadData(flag) {
+    try{
         const response = await fetch("https://ptcgp-d1101-default-rtdb.firebaseio.com/.json");
         const jsondata = await response.json();
         const data = Object.values(jsondata);
@@ -204,6 +205,10 @@ async function loadData(flag) {
             populateFilterCheckboxes('retreatCostFilter', retreatCosts, 'retreatCost');
             populateFilterCheckboxes('abilityFilter', abilities, 'ability');
         }
+    }
+    catch (e) {More actions
+        alert("Failed to load data" + e);More actions
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
