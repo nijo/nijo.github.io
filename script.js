@@ -17,6 +17,7 @@ let SearchedData = [];
 let searchQuery = "";
 let defaultCriteria = 'id';
 let defaultOrder = 'asc';
+let flag = false;
 const sets = new Set();
 const rarities = new Set();
 const types = new Set();
