@@ -166,12 +166,12 @@
                             rarityImgs += `<img src="Rarity/${r}.png" alt="${r}" style="width:14px">`;
                         });
                     }
-                    html += `<tr onclick = openModal(${index})>
-                            <td class="nowrap">${item.id || ''}</td>
-                            <td>
+                    html += `<tr>
+                            <td onclick = openModal(${index}) class="nowrap">${item.id || ''}</td>
+                            <td onclick = openModal(${index})>
                                 <span class="badge-type name-search">${item.name || ''}</span>
                             </td>
-                            <td>
+                            <td onclick = openModal(${index})>
                                 ${rarityImgs}
                                 <span class="d-none rarity-search">${rarityText.trim()}</span>
                             </td>
@@ -210,7 +210,8 @@
                 $.ajax({
                     url: 'https://ptcgp-d1101-default-rtdb.firebaseio.com/' + slNo + '.json',
                     method: 'PATCH',
-                    data: { count: newCount },
+                    contentType: 'application/json',
+                    data: JSON.stringify({ count: newCount }),
                     success: function(response) {
                         td.find('.count-value').text(newCount).removeClass('d-none');
                         td.find('.count-input').addClass('d-none');
