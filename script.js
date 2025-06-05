@@ -171,43 +171,38 @@ function divToggle(){
 document.getElementById('closeButton').onclick = closeModal;
 
 async function loadData(flag) {
-    try{
-        const response = await fetch("https://ptcgp-d1101-default-rtdb.firebaseio.com/.json");
-        const jsondata = await response.json();
-        const groupedData = Object.values(jsondata);
+    const response = await fetch("https://ptcgp-d1101-default-rtdb.firebaseio.com/.json");
+    const jsondata = await response.json();
+    const groupedData = Object.values(jsondata);
+    
+    if(flag != true){
+        SearchedData = groupedData;
+        groupedData.forEach(row => {
+            if (row.set) sets.add(row.set);
+            if (row.rarity.toString()) rarities.add(row.rarity.toString());
+            if (row.type) types.add(row.type);
+            if (row.stage) stages.add(row.stage);
+            if (row.weakness) weaknesses.add(row.weakness);
+            if (row.cardType) cardTypes.add(row.cardType);
+            if (row.pack) packs.add(row.pack);
+            if (row.retreatCost) retreatCosts.add(row.retreatCost);
+            row.abilities.add('Yes');
+        });
         
-        if(flag != true){
-            SearchedData = groupedData;
-            groupedData.forEach(row => {
-                if (row.set) sets.add(row.set);
-                if (row.rarity.toString()) rarities.add(row.rarity.toString());
-                if (row.type) types.add(row.type);
-                if (row.stage) stages.add(row.stage);
-                if (row.weakness) weaknesses.add(row.weakness);
-                if (row.cardType) cardTypes.add(row.cardType);
-                if (row.pack) packs.add(row.pack);
-                if (row.retreatCost) retreatCosts.add(row.retreatCost);
-                row.abilities.add('Yes');
-            });
-            
-            populateFilterCheckboxes('setFilter', sets, 'set');
-            populateFilterCheckboxes('rarityFilter', rarities, 'rarity');
-            populateFilterCheckboxes('typeFilter', types, 'type');
-            populateFilterCheckboxes('stageFilter', stages, 'stage');
-            populateFilterCheckboxes('weaknessFilter', weaknesses, 'weakness');
-            populateFilterCheckboxes('cardTypeFilter', cardTypes, 'cardType');
-            populateFilterCheckboxes('packFilter', packs, 'pack');
-            populateFilterCheckboxes('retreatCostFilter', retreatCosts, 'retreatCost');
-            populateFilterCheckboxes('abilityFilter', abilities, 'ability');
+        populateFilterCheckboxes('setFilter', sets, 'set');
+        populateFilterCheckboxes('rarityFilter', rarities, 'rarity');
+        populateFilterCheckboxes('typeFilter', types, 'type');
+        populateFilterCheckboxes('stageFilter', stages, 'stage');
+        populateFilterCheckboxes('weaknessFilter', weaknesses, 'weakness');
+        populateFilterCheckboxes('cardTypeFilter', cardTypes, 'cardType');
+        populateFilterCheckboxes('packFilter', packs, 'pack');
+        populateFilterCheckboxes('retreatCostFilter', retreatCosts, 'retreatCost');
+        populateFilterCheckboxes('abilityFilter', abilities, 'ability');
 
-            renderData(groupedData);
-        }
-        else{
-            setFilters(currentFilters, searchQuery, flag)
-        }
+        renderData(groupedData);
     }
-    catch (e) {
-        alert("Failed to load data" + e);
+    else{
+        setFilters(currentFilters, searchQuery, flag)
     }
 }
 
