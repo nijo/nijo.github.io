@@ -186,7 +186,7 @@ async function loadData(flag) {
             if (row.cardType) cardTypes.add(row.cardType);
             if (row.pack) packs.add(row.pack);
             if (row.retreatCost) retreatCosts.add(row.retreatCost);
-            row.abilities.add('Yes');
+            abilities.add('Yes');
         });
         
         populateFilterCheckboxes('setFilter', sets, 'set');
