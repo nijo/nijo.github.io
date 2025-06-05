@@ -173,25 +173,20 @@ async function loadData(flag) {
     try{
         const response = await fetch("https://ptcgp-d1101-default-rtdb.firebaseio.com/.json");
         const jsondata = await response.json();
-        const data = Object.values(jsondata);
-        data.forEach(row => {
-            const [id, name, rarity, pack, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count] = [ row.slNo, row.name, row.rarity, row.pack, row.type, row.imageURL, row.stage, row.hp, row.weakness, row.evolvesFrom, row.evolvesInto, row.cardType, row.retreatCost, row.set, row.info, row.abilityName, row.abilityDescription, row.attackInfo, row.count ];
-            groupedData.push({ id, name, pack, rarity, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count });
-        });
+        const groupedData = Object.values(jsondata);
         
         if(flag != true){
             SearchedData = groupedData;
             groupedData.forEach(row => {
-                const [id, name, rarity, pack, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count] = [ row.id, row.name, row.rarity, row.pack, row.type, row.imageUrl, row.stage, row.hp, row.weakness, row.evolvesFrom, row.evolvesInto, row.cardType, row.retreatCost, row.set, row.info, row.abilityName, row.abilityDescription, row.attackInfo, row.count];
-                if (set) sets.add(set);
-                if (rarity.toString()) rarities.add(rarity.toString());
-                if (type) types.add(type);
-                if (stage) stages.add(stage);
-                if (weakness) weaknesses.add(weakness);
-                if (cardType) cardTypes.add(cardType);
-                if (pack) packs.add(pack);
-                if (retreatCost) retreatCosts.add(retreatCost);
-                abilities.add('Yes');
+                if (row.set) sets.add(row.set);
+                if (row.rarity.toString()) rarities.add(row.rarity.toString());
+                if (row.type) types.add(row.type);
+                if (row.stage) stages.add(row.stage);
+                if (row.weakness) weaknesses.add(row.weakness);
+                if (row.cardType) cardTypes.add(row.cardType);
+                if (row.pack) packs.add(row.pack);
+                if (row.retreatCost) retreatCosts.add(row.retreatCost);
+                row.abilities.add('Yes');
             });
             
             populateFilterCheckboxes('setFilter', sets, 'set');
