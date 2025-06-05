@@ -244,7 +244,7 @@ function openModal(index) {
     const modalDescription = document.getElementById('modalDescription');
     let type = '';
     let weakness = '';
-    modalImage.src = pokemon.imageUrl;
+    modalImage.src = pokemon.imageURL;
     modalImage.alt = pokemon.name;
     const attacks = pokemon.attackInfo.map(function(a) {
         return `<li><strong data-bs-toggle="tooltip" data-bs-html="true" title="${a.attackExtra ? '<em>' + a.attackExtra + '</em>' : ''}">
