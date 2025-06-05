@@ -169,8 +169,9 @@ document.getElementById('closeButton').onclick = closeModal;
 
 async function loadData() {
     try {
-        const response = await fetch("db.php");
-        const data = await response.json();
+        const response = await fetch("https://ptcgp-d1101-default-rtdb.firebaseio.com/.json");
+        const jsondata = await response.json();
+        const data = Object.values(jsondata);
         data.forEach(row => {
             const [id, name, rarity, pack, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count] = [ row.slNo, row.name, row.rarity, row.pack, row.type, row.imageURL, row.stage, row.hp, row.weakness, row.evolvesFrom, row.evolvesInto, row.cardType, row.retreatCost, row.set, row.info, row.abilityName, row.abilityDescription, row.attackInfo, row.count ];
             groupedData.push({ id, name, pack, rarity, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count });
