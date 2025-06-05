@@ -185,7 +185,9 @@ async function loadData(flag) {
             groupedData.forEach(row => {
                 const [id, name, rarity, pack, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count] = [ row.id, row.name, row.rarity, row.pack, row.type, row.imageUrl, row.stage, row.hp, row.weakness, row.evolvesFrom, row.evolvesInto, row.cardType, row.retreatCost, row.set, row.info, row.abilityName, row.abilityDescription, row.attackInfo, row.count];
                 if (set) sets.add(set);
+                console.log(1);
                 if (rarity.toString()) rarities.add(rarity.toString());
+                console.log(2);
                 if (type) types.add(type);
                 if (stage) stages.add(stage);
                 if (weakness) weaknesses.add(weakness);
