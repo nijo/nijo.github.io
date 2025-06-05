@@ -180,7 +180,6 @@ async function loadData(flag) {
         renderData(groupedData);
         
         if(flag != true){
-            console.log(groupedData);
             SearchedData = groupedData;
             groupedData.forEach(row => {
                 const [id, name, rarity, pack, type, imageUrl, stage, hp, weakness, evolvesFrom, evolvesInto, cardType, retreatCost, set, info, abilityName, abilityDescription, attackInfo, count] = [ row.id, row.name, row.rarity, row.pack, row.type, row.imageUrl, row.stage, row.hp, row.weakness, row.evolvesFrom, row.evolvesInto, row.cardType, row.retreatCost, row.set, row.info, row.abilityName, row.abilityDescription, row.attackInfo, row.count];
