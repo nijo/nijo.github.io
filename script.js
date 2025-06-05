@@ -28,6 +28,42 @@ const packs = new Set();
 const retreatCosts = new Set();
 const abilities = new Set();
 
+async function loadData(flag) {
+    const response = await fetch("https://ptcgp-d1101-default-rtdb.firebaseio.com/.json");
+    const jsondata = await response.json();
+    groupedData = Object.values(jsondata);
+    
+    if(flag != true){
+        SearchedData = groupedData;
+        groupedData.forEach(row => {
+            if (row.set) sets.add(row.set);
+            if (row.rarity.toString()) rarities.add(row.rarity.toString());
+            if (row.type) types.add(row.type);
+            if (row.stage) stages.add(row.stage);
+            if (row.weakness) weaknesses.add(row.weakness);
+            if (row.cardType) cardTypes.add(row.cardType);
+            if (row.pack) packs.add(row.pack);
+            if (row.retreatCost) retreatCosts.add(row.retreatCost);
+            abilities.add('Yes');
+        });
+        
+        populateFilterCheckboxes('setFilter', sets, 'set');
+        populateFilterCheckboxes('rarityFilter', rarities, 'rarity');
+        populateFilterCheckboxes('typeFilter', types, 'type');
+        populateFilterCheckboxes('stageFilter', stages, 'stage');
+        populateFilterCheckboxes('weaknessFilter', weaknesses, 'weakness');
+        populateFilterCheckboxes('cardTypeFilter', cardTypes, 'cardType');
+        populateFilterCheckboxes('packFilter', packs, 'pack');
+        populateFilterCheckboxes('retreatCostFilter', retreatCosts, 'retreatCost');
+        populateFilterCheckboxes('abilityFilter', abilities, 'ability');
+
+        renderData(groupedData);
+    }
+    else{
+        setFilters(currentFilters, searchQuery, flag)
+    }
+}
+
 function populateFilterCheckboxes(filterId, options, filterType) {
     const filter = document.getElementById(filterId);
     options.forEach(option => {
@@ -78,6 +114,7 @@ function populateFilterCheckboxes(filterId, options, filterType) {
         filter.appendChild(li);
     });
 }
+
 function getFilters(filterId, filterType, filterValue) {
     if (filterValue === 'all') {
         currentFilters[filterType] = 'all';
@@ -98,8 +135,6 @@ document.getElementById('searchInput').addEventListener('input', function() {
 
 //Apply search and dropdown filters
 function setFilters(currentFilters, searchQuery) {
-    console.log(currentFilters);
-    console.log(searchQuery);
     const selectedField = document.getElementById('searchField').value;
     filteredData = groupedData.filter(row => {
         if (
@@ -117,7 +152,6 @@ function setFilters(currentFilters, searchQuery) {
             else return String(row[selectedField] || '').toLowerCase().includes(searchQuery);
         }
     });
-
     SearchedData = filteredData;
     renderData(SearchedData);
     if(flag != true){
@@ -125,8 +159,43 @@ function setFilters(currentFilters, searchQuery) {
     }
 }
 
-//Sort images.
+function showFilterAppliedPopup(SearchedData) {
+    // Remove existing popup if any
+    const existing = document.getElementById('filterAppliedPopup');
+    if (existing) existing.remove();
 
+    // Create popup div
+    const total = SearchedData.length;
+    const obtained = SearchedData.filter(row => row.count > 0).length;
+    const playable = SearchedData.filter(row => row.count > 1).length;
+    const tradeable = SearchedData.filter(row => row.count > 2).length;
+
+    const popup = document.createElement('div');
+    popup.id = 'filterAppliedPopup';
+    popup.innerText = 'Total: ' + total + '\nObtained: ' + obtained + '\nPlayable: ' + playable + '\nTradeable: ' + tradeable;
+    popup.style.position = 'fixed';
+    popup.style.top = '30px';
+    popup.style.right = '30px';
+    popup.style.background = '#007bff';
+    popup.style.color = '#fff';
+    popup.style.padding = '16px 32px';
+    popup.style.borderRadius = '8px';
+    popup.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
+    popup.style.zIndex = '9999';
+    popup.style.fontSize = '1.2rem';
+    popup.style.opacity = '0.95';
+    document.body.appendChild(popup);
+
+    // Handler to close popup when clicking outside
+    document.addEventListener('mousedown', (event) => {
+        if (!popup.contains(event.target)) {
+            popup.remove();
+            document.removeEventListener('mousedown', arguments.callee);
+        }
+    });
+}
+
+//Sort images.
 function sortImages(criteria, order) {
     if(criteria === 'hp' || criteria === 'count'){
         if (order === 'asc') {
@@ -161,56 +230,6 @@ function sortImages(criteria, order) {
     renderData(SearchedData);
 }
 
-function closeModal() {
-    document.getElementById('imageModal').style.display = 'none';
-}
-
-function divToggle(){
-    var x = document.getElementById('Filters');
-    x.style.display === 'none'?x.style.display='block':x.style.display='none';
-}
-
-document.getElementById('closeButton').onclick = closeModal;
-
-async function loadData(flag) {
-    const response = await fetch("https://ptcgp-d1101-default-rtdb.firebaseio.com/.json");
-    const jsondata = await response.json();
-    const groupedData = Object.values(jsondata);
-    
-    if(flag != true){
-        SearchedData = groupedData;
-        groupedData.forEach(row => {
-            if (row.set) sets.add(row.set);
-            if (row.rarity.toString()) rarities.add(row.rarity.toString());
-            if (row.type) types.add(row.type);
-            if (row.stage) stages.add(row.stage);
-            if (row.weakness) weaknesses.add(row.weakness);
-            if (row.cardType) cardTypes.add(row.cardType);
-            if (row.pack) packs.add(row.pack);
-            if (row.retreatCost) retreatCosts.add(row.retreatCost);
-            abilities.add('Yes');
-        });
-        
-        populateFilterCheckboxes('setFilter', sets, 'set');
-        populateFilterCheckboxes('rarityFilter', rarities, 'rarity');
-        populateFilterCheckboxes('typeFilter', types, 'type');
-        populateFilterCheckboxes('stageFilter', stages, 'stage');
-        populateFilterCheckboxes('weaknessFilter', weaknesses, 'weakness');
-        populateFilterCheckboxes('cardTypeFilter', cardTypes, 'cardType');
-        populateFilterCheckboxes('packFilter', packs, 'pack');
-        populateFilterCheckboxes('retreatCostFilter', retreatCosts, 'retreatCost');
-        populateFilterCheckboxes('abilityFilter', abilities, 'ability');
-
-        renderData(groupedData);
-    }
-    else{
-        setFilters(currentFilters, searchQuery, flag)
-    }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    loadData();
-});
 //Toggle filters
 function divToggle(){
     var x = document.getElementById('Filters');
@@ -295,41 +314,14 @@ function showPreviousImage() {
     openModal(currentImageIndex);
 }
 
+function closeModal() {
+    document.getElementById('imageModal').style.display = 'none';
+}
+
+document.getElementById('closeButton').onclick = closeModal;
 document.getElementById('nextButton').onclick = showNextImage;
 document.getElementById('prevButton').onclick = showPreviousImage;
 
-function showFilterAppliedPopup(SearchedData) {
-    // Remove existing popup if any
-    const existing = document.getElementById('filterAppliedPopup');
-    if (existing) existing.remove();
-
-    // Create popup div
-    const total = SearchedData.length;
-    const obtained = SearchedData.filter(row => row.count > 0).length;
-    const playable = SearchedData.filter(row => row.count > 1).length;
-    const tradeable = SearchedData.filter(row => row.count > 2).length;
-
-    const popup = document.createElement('div');
-    popup.id = 'filterAppliedPopup';
-    popup.innerText = 'Total: ' + total + '\nObtained: ' + obtained + '\nPlayable: ' + playable + '\nTradeable: ' + tradeable;
-    popup.style.position = 'fixed';
-    popup.style.top = '30px';
-    popup.style.right = '30px';
-    popup.style.background = '#007bff';
-    popup.style.color = '#fff';
-    popup.style.padding = '16px 32px';
-    popup.style.borderRadius = '8px';
-    popup.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
-    popup.style.zIndex = '9999';
-    popup.style.fontSize = '1.2rem';
-    popup.style.opacity = '0.95';
-    document.body.appendChild(popup);
-
-    // Handler to close popup when clicking outside
-    document.addEventListener('mousedown', (event) => {
-        if (!popup.contains(event.target)) {
-            popup.remove();
-            document.removeEventListener('mousedown', arguments.callee);
-        }
-    });
-}
+document.addEventListener("DOMContentLoaded", () => {
+    loadData();
+});
