@@ -17,7 +17,7 @@
                     <select id="searchField" class="form-select" style="width: 150px; margin-left: 10px;">
                         <option value="all">All Fields</option>
                         <option value="name">Name</option>
-                        <option value="id">ID</option>
+                        <option value="slNo">slNo</option>
                         <option value="evolvesFrom">Evolves From</option>
                         <option value="evolvesInto">Evolves Into</option>
                     </select>
@@ -85,8 +85,8 @@
                     <div class="btn-group" role="group" aria-label="Sort options">
                         <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Sort By</button>
                         <ul id="sortOptions" class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" onclick="sortImages('id', 'asc')">Id (Asc)</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="sortImages('id', 'desc')">Id (Desc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('slNo', 'asc')">slNo (Asc)</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="sortImages('slNo', 'desc')">slNo (Desc)</a></li>
                             <li><a class="dropdown-item" href="#" onclick="sortImages('name', 'asc')">Name (Asc)</a></li>
                             <li><a class="dropdown-item" href="#" onclick="sortImages('name', 'desc')">Name (Desc)</a></li>
                             <li><a class="dropdown-item" href="#" onclick="sortImages('attack', 'asc')">Attack (Asc)</a></li>
@@ -141,7 +141,7 @@
 
                     const img = document.createElement('img');
                     img.src = item.imageUrl;
-                    img.alt = item.id + " " + item.name;
+                    img.alt = item.slNo + " " + item.name;
                     img.loading = "lazy";
                     img.onclick = () => openModal(index);
 
