@@ -42,7 +42,7 @@ async function loadData(flag) {
             if (row.stage) stages.add(row.stage);
             if (row.weakness) weaknesses.add(row.weakness);
             if (row.cardType) cardTypes.add(row.cardType);
-            if (row.pack.toString()) packs.add(row.pack.toString());
+            if (row.pack) packs.add(row.pack.toString());
             if (Number.isInteger(row.retreatCost)) retreatCosts.add(row.retreatCost);
             abilities.add('Yes');
         });
