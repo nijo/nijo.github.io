@@ -164,9 +164,9 @@
         <script src="script.js"></script>
         <script>
             //Render the table.
-            function renderData(data) {
+            function renderData(groupedData) {
                 let html = '';
-                data.forEach((item, index) => {
+                Object.values(groupedData).forEach((item, index) => {
                     // Rarity images and text
                     let rarityText = '';
                     let rarityImgs = '';
@@ -175,7 +175,7 @@
                     if (Array.isArray(item.rarity)) {
                         item.rarity.forEach(r => {
                             rarityText += r + ', ';
-                            rarityImgs += `<img src="Rarity/${r}.png" alt="${r}" style="width:14px">`;
+                            rarityImgs += `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Rarities%2F${r}.png" alt="${r}" style="width:14px">`;
                         });
                     }
                     html += `<tr>
