@@ -119,6 +119,7 @@ document.getElementById('searchInput').addEventListener('input', function() {
 //Apply search and dropdown filters
 function setFilters(currentFilters, searchQuery) {
     const selectedField = document.getElementById('searchField').value;
+    console.log(currentFilters);
     filteredData = Object.values(groupedData[0]).filter(row => {
         if (
             (currentFilters.set === 'all' || currentFilters.set.includes(row.set)) &&
@@ -135,6 +136,7 @@ function setFilters(currentFilters, searchQuery) {
             else return String(row[selectedField] || '').toLowerCase().includes(searchQuery);
         }
     });
+    console.log(filteredData);
     SearchedData = filteredData;
     renderData(SearchedData);
     if(flag != true){
