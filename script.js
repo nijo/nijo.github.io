@@ -7,7 +7,9 @@ let currentFilters = {
     set: 'all',
     pack: 'all',
     retreatCost: 'all',
-    ability: 'all'
+    ability: 'all',
+    generation: 'all',
+    attack: 'all'
 };
 
 let currentImageIndex = 0;
@@ -18,15 +20,6 @@ let searchQuery = "";
 let defaultCriteria = 'slNo';
 let defaultOrder = 'asc';
 let flag = false;
-const sets = new Set();
-const rarities = new Set();
-const types = new Set();
-const stages = new Set();
-const weaknesses = new Set();
-const cardTypes = new Set();
-const packs = new Set();
-const retreatCosts = new Set();
-const abilities = new Set();
 
 async function loadData(flag) {
     const response = await fetch("https://ptcgp-d1101-default-rtdb.firebaseio.com/.json");
@@ -34,30 +27,21 @@ async function loadData(flag) {
     groupedData = Object.values(jsondata);
     
     if(flag != true){
-        SearchedData = groupedData;
-        groupedData.forEach(row => {
-            if (row.set) sets.add(row.set);
-            if (row.rarity.toString()) rarities.add(row.rarity.toString());
-            if (row.type) types.add(row.type);
-            if (row.stage) stages.add(row.stage);
-            if (row.weakness) weaknesses.add(row.weakness);
-            if (row.cardType) cardTypes.add(row.cardType);
-            if (row.pack) packs.add(row.pack);
-            if (row.retreatCost) retreatCosts.add(row.retreatCost);
-            abilities.add('Yes');
-        });
+        SearchedData = groupedData.cards;
         
-        populateFilterCheckboxes('setFilter', sets, 'set');
-        populateFilterCheckboxes('rarityFilter', rarities, 'rarity');
-        populateFilterCheckboxes('typeFilter', types, 'type');
-        populateFilterCheckboxes('stageFilter', stages, 'stage');
-        populateFilterCheckboxes('weaknessFilter', weaknesses, 'weakness');
-        populateFilterCheckboxes('cardTypeFilter', cardTypes, 'cardType');
-        populateFilterCheckboxes('packFilter', packs, 'pack');
-        populateFilterCheckboxes('retreatCostFilter', retreatCosts, 'retreatCost');
-        populateFilterCheckboxes('abilityFilter', abilities, 'ability');
+        populateFilterCheckboxes('setFilter', groupedData.filters.sets, 'set');
+        populateFilterCheckboxes('rarityFilter', groupedData.filters.rarities, 'rarity');
+        populateFilterCheckboxes('typeFilter', groupedData.filters.types, 'type');
+        populateFilterCheckboxes('stageFilter', groupedData.filters.stages, 'stage');
+        populateFilterCheckboxes('weaknessFilter', groupedData.filters.weaknesses, 'weakness');
+        populateFilterCheckboxes('cardTypeFilter', groupedData.filters.cardTypes, 'cardType');
+        populateFilterCheckboxes('packFilter', groupedData.filters.packs, 'pack');
+        populateFilterCheckboxes('retreatCostFilter', groupedData.filters.retreatCosts, 'retreatCost');
+        populateFilterCheckboxes('abilityFilter', groupedData.filters.ability, 'ability');
+        populateFilterCheckboxes('generationFilter', groupedData.filters.generations, 'generation');
+        populateFilterCheckboxes('attackFilter', groupedData.filters.attack, 'attack');
 
-        renderData(groupedData);
+        renderData(groupedData.cards);
     }
     else{
         setFilters(currentFilters, searchQuery, flag)
@@ -80,7 +64,7 @@ function populateFilterCheckboxes(filterId, options, filterType) {
         if(filterType == 'type' || filterType == 'weakness'){
             if(option != 'NA'){
                 const img = document.createElement('img');
-                img.src = 'Type/' + option + '.png';
+                img.src = 'https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Types%2F' + option + '.png';
                 img.alt = option;
                 img.for = `${filterType}${option}`;
                 img.style.width ='14px';
@@ -96,7 +80,7 @@ function populateFilterCheckboxes(filterId, options, filterType) {
             option = option.split(',');
             option.forEach(item => {
                 const img = document.createElement('img');
-                img.src = 'Rarity/' + item + '.png';
+                img.src = 'https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Rarities%2F' + item + '.png';
                 img.alt = item;
                 img.for = `${filterType}${option}`;
                 img.style.width ='14px';
@@ -244,13 +228,13 @@ function openModal(index) {
     const modalDescription = document.getElementById('modalDescription');
     let type = '';
     let weakness = '';
-    modalImage.src = pokemon.imageURL;
+    modalImage.src = `https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Cards%2F${pokemon.slNo}.webp?alt=media`;
     modalImage.alt = pokemon.name;
     const attacks = pokemon.attackInfo.map(function(a) {
         return `<li><strong data-bs-toggle="tooltip" data-bs-html="true" title="${a.attackExtra ? '<em>' + a.attackExtra + '</em>' : ''}">
         ${a.attackExtra ? '<u>' + a.attackName + '</u>' : a.attackName}</strong> - ${a.attackDamage || '00'} (${a.attackCost.map(b => `<img src="Type/${b}.png" style="width:14px">`).join('')})</li>`;
     }).join('');
-    const rarity = pokemon.rarity.map(a => `<img src="Rarity/${a}.png" style="width:14px">`).join('');
+    const rarity = pokemon.rarity.map(a => `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Rarities%2F${a}.png" style="width:14px">`).join('');
     let evolvesInto = '';
     let temp = JSON.parse(JSON.stringify(pokemon.evolvesInto));
     if (temp && temp.length !== 0) {
@@ -265,13 +249,13 @@ function openModal(index) {
         type = `<label>${pokemon.type}</label>`;            
     }
     else{
-        type = `<img src="Type/${pokemon.type}.png" alt="${pokemon.type}" style="width: 14px;">`;
+        type = `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Types%2F${pokemon.type}.png" alt="${pokemon.type}" style="width: 14px;">`;
     }
     if(pokemon.weakness == 'NA' || pokemon.weakness == ''){
         weakness = `<label>${pokemon.weakness}</label>`;
     }
     else{
-        weakness = `<img src="Type/${pokemon.weakness}.png" alt="${pokemon.weakness}" style="width: 14px;">`;
+        weakness = `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Types%2F${pokemon.weakness}.png" alt="${pokemon.weakness}" style="width: 14px;">`;
     }
     modalDescription.innerHTML = `
         <div class="row"><div class='col'><strong data-bs-toggle="tooltip" data-bs-html="true" title="<em>${pokemon.info}</em>">${pokemon.name}</strong></div></div>
