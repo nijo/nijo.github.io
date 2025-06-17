@@ -41,7 +41,7 @@ async function loadData(flag) {
         populateFilterCheckboxes('generationFilter', groupedData[1].generations, 'generation');
         populateFilterCheckboxes('attackFilter', groupedData[1].attack, 'attack');
 
-        renderData(groupedData.cards);
+        renderData(groupedData[0]);
     }
     else{
         setFilters(currentFilters, searchQuery, flag)
@@ -119,7 +119,7 @@ document.getElementById('searchInput').addEventListener('input', function() {
 //Apply search and dropdown filters
 function setFilters(currentFilters, searchQuery) {
     const selectedField = document.getElementById('searchField').value;
-    filteredData = groupedData.filter(row => {
+    filteredData = groupedData[0].filter(row => {
         if (
             (currentFilters.set === 'all' || currentFilters.set.includes(row.set)) &&
             (currentFilters.rarity === 'all' || currentFilters.rarity.includes(row.rarity.toString())) &&
