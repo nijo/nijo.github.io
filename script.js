@@ -40,7 +40,7 @@ async function loadData(flag) {
         populateFilterCheckboxes('abilityFilter', groupedData[1].ability, 'ability');
         populateFilterCheckboxes('generationFilter', groupedData[1].generations, 'generation');
         populateFilterCheckboxes('attackFilter', groupedData[1].attack, 'attack');
-        populateFilterCheckboxes('evolvesIntoFilter', groupedData[1].evolvesInto, 'evolvesInto');
+        populateFilterCheckboxes('evolutionFilter', groupedData[1].evolvesInto, 'evolvesInto');
 
         renderData(Object.values(groupedData[0]));
     }
