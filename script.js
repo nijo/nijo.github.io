@@ -64,7 +64,7 @@ function populateFilterCheckboxes(filterId, options, filterType) {
         if(filterType == 'type' || filterType == 'weakness'){
             if(option != 'NA'){
                 const img = document.createElement('img');
-                img.src = 'https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Types%2F' + option + '.png';
+                img.src = 'https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Types%2F' + option + '.png?alt=media';
                 img.alt = option;
                 img.for = `${filterType}${option}`;
                 img.style.width ='14px';
@@ -79,7 +79,7 @@ function populateFilterCheckboxes(filterId, options, filterType) {
         else if(filterType == 'rarity'){
             option.forEach(item => {
                 const img = document.createElement('img');
-                img.src = 'https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Rarities%2F' + item + '.png';
+                img.src = 'https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Rarities%2F' + item + '.png?alt=media';
                 img.alt = item;
                 img.for = `${filterType}${option}`;
                 img.style.width ='14px';
