@@ -107,6 +107,7 @@ jsonData.data.expansions.forEach((a) => {
 	var URI = "Sets%2F" + a.name.replace(" ", "_") + ".webp";
 	imgURLs.push({'getUrl': a.logoAssetUrl, 'postUrl': URI});
 })
+
 fetch("https://ptcgp-d1101-default-rtdb.firebaseio.com/filters.json", { 
 	method: "PATCH", 
 	body: JSON.stringify({"ability": ability, "attack": attack, "cardTypes": cardTypes, "HPrange": HPrange, "packs": packs, "sets": sets, "retreatCosts": retreatCosts, "rarities": rarities, "stages": stages, "types": types, "weaknesses": weaknesses, "generations": generations, "evolvesInto": evolvesInto}) 
