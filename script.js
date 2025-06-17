@@ -40,6 +40,7 @@ async function loadData(flag) {
         populateFilterCheckboxes('abilityFilter', groupedData[1].ability, 'ability');
         populateFilterCheckboxes('generationFilter', groupedData[1].generations, 'generation');
         populateFilterCheckboxes('attackFilter', groupedData[1].attack, 'attack');
+        populateFilterCheckboxes('evolvesIntoFilter', groupedData[1].evolvesInto, 'evolvesInto');
 
         renderData(Object.values(groupedData[0]));
     }
@@ -131,7 +132,8 @@ function setFilters(currentFilters, searchQuery) {
             (currentFilters.retreatCost === 'all' || currentFilters.retreatCost.includes(row.retreatCost.toString())) &&
             (currentFilters.generation === 'all' || currentFilters.generation.includes(row.generation.toString())) &&
             (currentFilters.attack === 'all' || (currentFilters.attack.includes('Yes') && row.attackInfo != 'NA') || (currentFilters.attack.includes('No') && row.attackInfo == 'NA')) &&
-            (currentFilters.ability === 'all' || (currentFilters.ability.includes('Yes') && row.abilityInfo.name != 'NA') || (currentFilters.ability.includes('No') && row.abilityInfo.name == 'NA'))
+            (currentFilters.ability === 'all' || (currentFilters.ability.includes('Yes') && row.abilityInfo.name != 'NA') || (currentFilters.ability.includes('No') && row.abilityInfo.name == 'NA')) &&
+            (currentFilters.evolvesInto === 'all' || (currentFilters.evolvesInto.includes('Yes') && row.evolvesInto != 'NA') || (currentFilters.evolvesInto.includes('No') && row.evolvesInto == 'NA'))
         ) {
             if (selectedField === 'all') return Object.entries(row).some(entry => String(entry[1]).toLowerCase().includes(searchQuery));
             else return String(row[selectedField] || '').toLowerCase().includes(searchQuery);
