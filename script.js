@@ -77,7 +77,6 @@ function populateFilterCheckboxes(filterId, options, filterType) {
             }
         }
         else if(filterType == 'rarity'){
-            option = option.split(',');
             option.forEach(item => {
                 const img = document.createElement('img');
                 img.src = 'https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Rarities%2F' + item + '.png';
