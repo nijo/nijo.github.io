@@ -9,7 +9,8 @@ let currentFilters = {
     retreatCost: 'all',
     ability: 'all',
     generation: 'all',
-    attack: 'all'
+    attack: 'all',
+    evolution: 'all'
 };
 
 let currentImageIndex = 0;
@@ -40,7 +41,7 @@ async function loadData(flag) {
         populateFilterCheckboxes('abilityFilter', groupedData[1].ability, 'ability');
         populateFilterCheckboxes('generationFilter', groupedData[1].generations, 'generation');
         populateFilterCheckboxes('attackFilter', groupedData[1].attack, 'attack');
-        populateFilterCheckboxes('evolutionFilter', groupedData[1].evolvesInto, 'evolvesInto');
+        populateFilterCheckboxes('evolutionFilter', groupedData[1].evolvesInto, 'evolution');
 
         renderData(Object.values(groupedData[0]));
     }
