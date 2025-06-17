@@ -227,19 +227,20 @@ function openModal(index) {
     const modal = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
     const modalDescription = document.getElementById('modalDescription');
-    let type = '';
-    let weakness = '';
+    var type = '';
+    var weakness = '';
+    var attacks = '';
     modalImage.src = `https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Cards%2F${pokemon.slNo}.webp?alt=media`;
     modalImage.alt = pokemon.name;
     if(pokemon.attackInfo != 'NA' && pokemon.attackInfo.length != 0){
-        const attacks = pokemon.attackInfo.map(function(a) {
+        attacks = pokemon.attackInfo.map(function(a) {
             return `<li><strong data-bs-toggle="tooltip" data-bs-html="true" title="${a.attackExtra ? '<em>' + a.attackExtra + '</em>' : ''}">
             ${a.attackExtra ? '<u>' + a.attackName + '</u>' : a.attackName}</strong> - ${a.attackDamage || '00'} (${a.attackCost.map(b => `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Types%2F${b}.png?alt=media" style="width:14px">`).join('')})</li>`;
         }).join('');
     }
     const rarity = pokemon.rarity.map(a => `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Rarities%2F${a}.png?alt=media" style="width:14px">`).join('');
-    let evolvesInto = '';
-    let temp = JSON.parse(JSON.stringify(pokemon.evolvesInto));
+    var evolvesInto = '';
+    var temp = JSON.parse(JSON.stringify(pokemon.evolvesInto));
     if (temp && temp.length !== 0) {
         if (Array.isArray(temp)) {
             evolvesInto = temp.join(', ');
