@@ -130,8 +130,8 @@ function setFilters(currentFilters, searchQuery) {
             (currentFilters.pack === 'all' || currentFilters.pack.some(item => row.pack.includes(item))) &&
             (currentFilters.retreatCost === 'all' || currentFilters.retreatCost.includes(row.retreatCost.toString())) &&
             (currentFilters.generation === 'all' || currentFilters.generation.includes(row.generation.toString())) &&
-            (currentFilters.attack === 'all' || (currentFilters.attack.includes('Yes') && row.attack.length != 0) || (currentFilters.attack.includes('No') && row.attack.length == 0)) &&
-            (currentFilters.ability === 'all' || (currentFilters.ability.includes('Yes') && row.ability.length != 0) || (currentFilters.ability.includes('No') && row.ability.length == 0))
+            (currentFilters.attack === 'all' || (currentFilters.attack.includes('Yes') && row.attackInfo.length != 0) || (currentFilters.attack.includes('No') && row.attackInfo.length == 0)) &&
+            (currentFilters.ability === 'all' || (currentFilters.ability.includes('Yes') && row.abilityInfo.length != 0) || (currentFilters.ability.includes('No') && row.abilityInfo.length == 0))
         ) {
             if (selectedField === 'all') return Object.entries(row).some(entry => String(entry[1]).toLowerCase().includes(searchQuery));
             else return String(row[selectedField] || '').toLowerCase().includes(searchQuery);
