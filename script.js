@@ -231,7 +231,7 @@ function openModal(index) {
     modalImage.alt = pokemon.name;
     const attacks = pokemon.attackInfo.map(function(a) {
         return `<li><strong data-bs-toggle="tooltip" data-bs-html="true" title="${a.attackExtra ? '<em>' + a.attackExtra + '</em>' : ''}">
-        ${a.attackExtra ? '<u>' + a.attackName + '</u>' : a.attackName}</strong> - ${a.attackDamage || '00'} (${a.attackCost.map(b => `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Type%2F${b}.png?alt=media" style="width:14px">`).join('')})</li>`;
+        ${a.attackExtra ? '<u>' + a.attackName + '</u>' : a.attackName}</strong> - ${a.attackDamage || '00'} (${a.attackCost.map(b => `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Types%2F${b}.png?alt=media" style="width:14px">`).join('')})</li>`;
     }).join('');
     const rarity = pokemon.rarity.map(a => `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Rarities%2F${a}.png?alt=media" style="width:14px">`).join('');
     let evolvesInto = '';
