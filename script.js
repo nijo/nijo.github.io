@@ -231,9 +231,9 @@ function openModal(index) {
     modalImage.alt = pokemon.name;
     const attacks = pokemon.attackInfo.map(function(a) {
         return `<li><strong data-bs-toggle="tooltip" data-bs-html="true" title="${a.attackExtra ? '<em>' + a.attackExtra + '</em>' : ''}">
-        ${a.attackExtra ? '<u>' + a.attackName + '</u>' : a.attackName}</strong> - ${a.attackDamage || '00'} (${a.attackCost.map(b => `<img src="Type/${b}.png" style="width:14px">`).join('')})</li>`;
+        ${a.attackExtra ? '<u>' + a.attackName + '</u>' : a.attackName}</strong> - ${a.attackDamage || '00'} (${a.attackCost.map(b => `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Type%2F${b}.png?alt=media" style="width:14px">`).join('')})</li>`;
     }).join('');
-    const rarity = pokemon.rarity.map(a => `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Rarities%2F${a}.png" style="width:14px">`).join('');
+    const rarity = pokemon.rarity.map(a => `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Rarities%2F${a}.png?alt=media" style="width:14px">`).join('');
     let evolvesInto = '';
     let temp = JSON.parse(JSON.stringify(pokemon.evolvesInto));
     if (temp && temp.length !== 0) {
@@ -248,13 +248,13 @@ function openModal(index) {
         type = `<label>${pokemon.type}</label>`;            
     }
     else{
-        type = `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Types%2F${pokemon.type}.png" alt="${pokemon.type}" style="width: 14px;">`;
+        type = `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Types%2F${pokemon.type}.png?alt=media" alt="${pokemon.type}" style="width: 14px;">`;
     }
     if(pokemon.weakness == 'NA' || pokemon.weakness == ''){
         weakness = `<label>${pokemon.weakness}</label>`;
     }
     else{
-        weakness = `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Types%2F${pokemon.weakness}.png" alt="${pokemon.weakness}" style="width: 14px;">`;
+        weakness = `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Types%2F${pokemon.weakness}.png?alt=media" alt="${pokemon.weakness}" style="width: 14px;">`;
     }
     modalDescription.innerHTML = `
         <div class="row"><div class='col'><strong data-bs-toggle="tooltip" data-bs-html="true" title="<em>${pokemon.info}</em>">${pokemon.name}</strong></div></div>
