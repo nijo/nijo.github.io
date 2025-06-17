@@ -130,7 +130,7 @@ function setFilters(currentFilters, searchQuery) {
             (currentFilters.pack === 'all' || currentFilters.pack.some(item => row.pack.includes(item))) &&
             (currentFilters.retreatCost === 'all' || currentFilters.retreatCost.includes(row.retreatCost.toString())) &&
             (currentFilters.generation === 'all' || currentFilters.generation.includes(row.generation.toString())) &&
-            (currentFilters.attack === 'all' || (currentFilters.attack.includes('Yes') && row.attackInfo.length != 0) || (currentFilters.attack.includes('No') && row.attackInfo.length == 0)) &&
+            (currentFilters.attack === 'all' || (currentFilters.attack.includes('Yes') && row.attackInfo != 'NA') || (currentFilters.attack.includes('No') && row.attackInfo == 'NA')) &&
             (currentFilters.ability === 'all' || (currentFilters.ability.includes('Yes') && row.abilityInfo.name != 'NA') || (currentFilters.ability.includes('No') && row.abilityInfo.name == 'NA'))
         ) {
             if (selectedField === 'all') return Object.entries(row).some(entry => String(entry[1]).toLowerCase().includes(searchQuery));
