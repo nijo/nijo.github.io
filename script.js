@@ -231,10 +231,12 @@ function openModal(index) {
     let weakness = '';
     modalImage.src = `https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Cards%2F${pokemon.slNo}.webp?alt=media`;
     modalImage.alt = pokemon.name;
-    const attacks = pokemon.attackInfo.map(function(a) {
-        return `<li><strong data-bs-toggle="tooltip" data-bs-html="true" title="${a.attackExtra ? '<em>' + a.attackExtra + '</em>' : ''}">
-        ${a.attackExtra ? '<u>' + a.attackName + '</u>' : a.attackName}</strong> - ${a.attackDamage || '00'} (${a.attackCost.map(b => `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Types%2F${b}.png?alt=media" style="width:14px">`).join('')})</li>`;
-    }).join('');
+    if(pokemon.attackInfo != 'NA' && pokemon.attackInfo.length != 0){
+        const attacks = pokemon.attackInfo.map(function(a) {
+            return `<li><strong data-bs-toggle="tooltip" data-bs-html="true" title="${a.attackExtra ? '<em>' + a.attackExtra + '</em>' : ''}">
+            ${a.attackExtra ? '<u>' + a.attackName + '</u>' : a.attackName}</strong> - ${a.attackDamage || '00'} (${a.attackCost.map(b => `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Types%2F${b}.png?alt=media" style="width:14px">`).join('')})</li>`;
+        }).join('');
+    }
     const rarity = pokemon.rarity.map(a => `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Rarities%2F${a}.png?alt=media" style="width:14px">`).join('');
     let evolvesInto = '';
     let temp = JSON.parse(JSON.stringify(pokemon.evolvesInto));
@@ -270,7 +272,7 @@ function openModal(index) {
         <div class="row"><div class='col-5'><strong>Retreat Cost:</strong></div><div class='col-7'>${pokemon.retreatCost}</div></div>
         <div class="row"><div class='col-5'><strong>Set:</strong></div><div class='col-7'>${pokemon.set}</div></div>
         <div class="row"><div class='col-5'><strong>Pack:</strong></div><div class='col-7'>${pokemon.pack}</div></div>
-        ${pokemon.abilityName ? `<div class="row"><div class='col-5'><strong>Ability:</strong></div><div class='col-7'><span data-bs-toggle="tooltip" data-bs-html="true" title="<em>${pokemon.abilityDescription}</em>">${pokemon.abilityName}</span></div></div>` : ''}
+        ${pokemon.abilityName ? `<div class="row"><div class='col-5'><strong>Ability:</strong></div><div class='col-7'><span data-bs-toggle="tooltip" data-bs-html="true" title="<em>${pokemon.abilityInfo.description}</em>">${pokemon.abilityInfo.name}</span></div></div>` : ''}
         <div class="row"><div class='col-5'><strong>Attacks:</strong></div><div class='col-7'>${attacks}</div></div>
         `;
 
