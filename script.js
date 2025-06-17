@@ -23,8 +23,8 @@ let flag = false;
 
 async function loadData(flag) {
     const response = await fetch("https://ptcgp-d1101-default-rtdb.firebaseio.com/.json");
-    const jsondata = await response.json();
-    groupedData = Object.values(jsondata);
+    const jsonData = await response.json();
+    groupedData = Object.values(jsonData);
     
     if(flag != true){
         SearchedData = groupedData.cards;
