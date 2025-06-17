@@ -27,19 +27,19 @@ async function loadData(flag) {
     groupedData = Object.values(jsonData);
     
     if(flag != true){
-        SearchedData = groupedData.cards;
+        SearchedData = groupedData[0];
         
-        populateFilterCheckboxes('setFilter', groupedData.filters.sets, 'set');
-        populateFilterCheckboxes('rarityFilter', groupedData.filters.rarities, 'rarity');
-        populateFilterCheckboxes('typeFilter', groupedData.filters.types, 'type');
-        populateFilterCheckboxes('stageFilter', groupedData.filters.stages, 'stage');
-        populateFilterCheckboxes('weaknessFilter', groupedData.filters.weaknesses, 'weakness');
-        populateFilterCheckboxes('cardTypeFilter', groupedData.filters.cardTypes, 'cardType');
-        populateFilterCheckboxes('packFilter', groupedData.filters.packs, 'pack');
-        populateFilterCheckboxes('retreatCostFilter', groupedData.filters.retreatCosts, 'retreatCost');
-        populateFilterCheckboxes('abilityFilter', groupedData.filters.ability, 'ability');
-        populateFilterCheckboxes('generationFilter', groupedData.filters.generations, 'generation');
-        populateFilterCheckboxes('attackFilter', groupedData.filters.attack, 'attack');
+        populateFilterCheckboxes('setFilter', groupedData[1].sets, 'set');
+        populateFilterCheckboxes('rarityFilter', groupedData[1].rarities, 'rarity');
+        populateFilterCheckboxes('typeFilter', groupedData[1].types, 'type');
+        populateFilterCheckboxes('stageFilter', groupedData[1].stages, 'stage');
+        populateFilterCheckboxes('weaknessFilter', groupedData[1].weaknesses, 'weakness');
+        populateFilterCheckboxes('cardTypeFilter', groupedData[1].cardTypes, 'cardType');
+        populateFilterCheckboxes('packFilter', groupedData[1].packs, 'pack');
+        populateFilterCheckboxes('retreatCostFilter', groupedData[1].retreatCosts, 'retreatCost');
+        populateFilterCheckboxes('abilityFilter', groupedData[1].ability, 'ability');
+        populateFilterCheckboxes('generationFilter', groupedData[1].generations, 'generation');
+        populateFilterCheckboxes('attackFilter', groupedData[1].attack, 'attack');
 
         renderData(groupedData.cards);
     }
