@@ -166,7 +166,7 @@
             //Render the table.
             function renderData(groupedData) {
                 let html = '';
-                Object.values(groupedData).forEach((item, index) => {
+                groupedData.forEach((item, index) => {
                     // Rarity images and text
                     let rarityText = '';
                     let rarityImgs = '';

@@ -146,7 +146,7 @@
 
                 galleryContainer.style.padding = '0px';
                 galleryContainer.innerHTML = ''; // Clear existing content
-                Object.values(groupedData).forEach((item, index) => {
+                groupedData.forEach((item, index) => {
                     const photoDiv = document.createElement('div');
                     photoDiv.classList.add('photo');
 

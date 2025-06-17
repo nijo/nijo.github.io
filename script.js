@@ -27,7 +27,7 @@ async function loadData(flag) {
     groupedData = Object.values(jsonData);
     
     if(flag != true){
-        SearchedData = groupedData[0];
+        SearchedData = Object.values(groupedData[0]);
         
         populateFilterCheckboxes('setFilter', groupedData[1].sets, 'set');
         populateFilterCheckboxes('rarityFilter', groupedData[1].rarities, 'rarity');
@@ -41,7 +41,7 @@ async function loadData(flag) {
         populateFilterCheckboxes('generationFilter', groupedData[1].generations, 'generation');
         populateFilterCheckboxes('attackFilter', groupedData[1].attack, 'attack');
 
-        renderData(groupedData[0]);
+        renderData(Object.values(groupedData[0]));
     }
     else{
         setFilters(currentFilters, searchQuery, flag)
@@ -119,7 +119,7 @@ document.getElementById('searchInput').addEventListener('input', function() {
 //Apply search and dropdown filters
 function setFilters(currentFilters, searchQuery) {
     const selectedField = document.getElementById('searchField').value;
-    filteredData = groupedData[0].filter(row => {
+    filteredData = Object.values(groupedData[0]).filter(row => {
         if (
             (currentFilters.set === 'all' || currentFilters.set.includes(row.set)) &&
             (currentFilters.rarity === 'all' || currentFilters.rarity.includes(row.rarity.toString())) &&
