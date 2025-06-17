@@ -82,6 +82,7 @@ trainerCards.forEach (a => {
 
 var ability = ['Yes', 'No'];
 var attack = ['Yes', 'No'];
+var evolvesInto = ['Yes', 'No'];
 var cardTypes = ['Pokemon', 'Trainer'];
 var HPrange = {'min': 40, 'max': 190};
 var packs = ["Shop", "Campaign", "Mission", "Wonder Pick", "Promo Pack"];
@@ -108,7 +109,7 @@ jsonData.data.expansions.forEach((a) => {
 })
 fetch("https://ptcgp-d1101-default-rtdb.firebaseio.com/filters.json", { 
 	method: "PATCH", 
-	body: JSON.stringify({"ability": ability, "attack": attack, "cardTypes": cardTypes, "HPrange": HPrange, "packs": packs, "sets": sets, "retreatCosts": retreatCosts, "rarities": rarities, "stages": stages, "types": types, "weaknesses": weaknesses, "generations": generations}) 
+	body: JSON.stringify({"ability": ability, "attack": attack, "cardTypes": cardTypes, "HPrange": HPrange, "packs": packs, "sets": sets, "retreatCosts": retreatCosts, "rarities": rarities, "stages": stages, "types": types, "weaknesses": weaknesses, "generations": generations, "evolvesInto": evolvesInto}) 
 });
 
 async function fetchAndPost() {
