@@ -119,7 +119,6 @@ document.getElementById('searchInput').addEventListener('input', function() {
 //Apply search and dropdown filters
 function setFilters(currentFilters, searchQuery) {
     const selectedField = document.getElementById('searchField').value;
-    console.log(currentFilters);
     filteredData = Object.values(groupedData[0]).filter(row => {
         if (
             (currentFilters.set === 'all' || currentFilters.set.includes(row.set)) &&
@@ -128,15 +127,16 @@ function setFilters(currentFilters, searchQuery) {
             (currentFilters.stage === 'all' || currentFilters.stage.includes(row.stage)) &&
             (currentFilters.weakness === 'all' || currentFilters.weakness.includes(row.weakness)) &&
             (currentFilters.cardType === 'all' || currentFilters.cardType.includes(row.cardType)) &&
-            (currentFilters.pack === 'all' || currentFilters.pack.includes(row.pack)) &&
-            (currentFilters.retreatCost === 'all' || currentFilters.retreatCost.includes(row.retreatCost)) &&
-            (currentFilters.ability === 'all' || (currentFilters.ability.includes('Yes') && row.abilityName != ''))
+            (currentFilters.pack === 'all' || currentFilters.pack.some(item => row.pack.includes(item))) &&
+            (currentFilters.retreatCost === 'all' || currentFilters.retreatCost.includes(row.retreatCost.toString())) &&
+            (currentFilters.generation === 'all' || currentFilters.generation.includes(row.generation.toString())) &&
+            (currentFilters.attack === 'all' || (currentFilters.attack.includes('Yes') && row.attack.length != 0) || (currentFilters.attack.includes('No') && row.attack.length == 0)) &&
+            (currentFilters.ability === 'all' || (currentFilters.ability.includes('Yes') && row.ability.length != 0) || (currentFilters.ability.includes('No') && row.ability.length == 0))
         ) {
             if (selectedField === 'all') return Object.entries(row).some(entry => String(entry[1]).toLowerCase().includes(searchQuery));
             else return String(row[selectedField] || '').toLowerCase().includes(searchQuery);
         }
     });
-    console.log(filteredData);
     SearchedData = filteredData;
     renderData(SearchedData);
     if(flag != true){
