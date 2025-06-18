@@ -232,7 +232,7 @@ html {
     padding: 0px;
 }
 #modalDescription div{
-    height: calc(512px/14.5);
+    height: calc(512px/15.5);
 }
 #modalDescription .row:first-child .col strong{
     font-size: 40px;

@@ -238,7 +238,7 @@ function openModal(index) {
     if(pokemon.attackInfo != 'NA' && pokemon.attackInfo.length != 0){
         attacks = pokemon.attackInfo.map(function(a) {
             return `<li><strong data-bs-toggle="tooltip" data-bs-html="true" title="${a.attackExtra ? '<em>' + a.attackExtra + '</em>' : ''}">
-            ${a.attackExtra ? '<u>' + a.attackName + '</u>' : a.attackName}</strong> - ${a.attackDamage || '00'} (${a.attackCost.map(b => `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Types%2F${b}.png?alt=media" style="width:14px">`).join('')})</li>`;
+            ${a.attackExtra != 'NA' ? '<u>' + a.attackName + '</u>' : a.attackName}</strong> - ${a.attackDamage || '00'} (${a.attackCost.map(b => `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Types%2F${b}.png?alt=media" style="width:14px">`).join('')})</li>`;
         }).join('');
     }
     const rarity = pokemon.rarity.map(a => `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Rarities%2F${a}.png?alt=media" style="width:14px">`).join('');
@@ -266,18 +266,19 @@ function openModal(index) {
     }
     modalDescription.innerHTML = `
         <div class="row"><div class='col'><strong data-bs-toggle="tooltip" data-bs-html="true" title="<em>${pokemon.info}</em>">${pokemon.name}</strong></div></div>
-        <div class="row"><div class='col-5'><strong>slNo:</strong></div><div class='col-7'>${pokemon.slNo}</div></div>
-        <div class="row"><div class='col-5'><strong>Rarity:</strong></div><div class='col-7'>${rarity}</div></div>
-        <div class="row"><div class='col-5'><strong>Type:</strong></div><div class='col-7'>${type}</div></div>
-        <div class="row"><div class='col-5'><strong>HP:</strong></div><div class='col-7'>${pokemon.hp}</div></div>
-        <div class="row"><div class='col-5'><strong>Stage:</strong></div><div class='col-7'><span data-bs-toggle="tooltip" data-bs-html="true" title="<em>Evolves From: ${pokemon.evolvesFrom}</em> || <em>Evolves To: ${evolvesInto}</em>">${pokemon.stage}</span></div></div>
-        <div class="row"><div class='col-5'><strong>Card Type:</strong></div><div class='col-7'>${pokemon.cardType}</div></div>
-        <div class="row"><div class='col-5'><strong>Weakness:</strong></div><div class='col-7'>${weakness}</div></div>
-        <div class="row"><div class='col-5'><strong>Retreat Cost:</strong></div><div class='col-7'>${pokemon.retreatCost}</div></div>
-        <div class="row"><div class='col-5'><strong>Set:</strong></div><div class='col-7'>${pokemon.set}</div></div>
-        <div class="row"><div class='col-5'><strong>Pack:</strong></div><div class='col-7'>${pokemon.pack}</div></div>
-        ${pokemon.abilityInfo.name ? `<div class="row"><div class='col-5'><strong>Ability:</strong></div><div class='col-7'><span data-bs-toggle="tooltip" data-bs-html="true" title="<em>${pokemon.abilityInfo.description}</em>">${pokemon.abilityInfo.name}</span></div></div>` : ''}
-        <div class="row"><div class='col-5'><strong>Attacks:</strong></div><div class='col-7'>${attacks}</div></div>
+        <div class="row"><div class='col-4'><strong>slNo:</strong></div><div class='col-8'>${pokemon.slNo}</div></div>
+        <div class="row"><div class='col-4'><strong>Rarity:</strong></div><div class='col-8'>${rarity}</div></div>
+        <div class="row"><div class='col-4'><strong>Type:</strong></div><div class='col-8'>${type}</div></div>
+        <div class="row"><div class='col-4'><strong>HP:</strong></div><div class='col-8'>${pokemon.hp}</div></div>
+        <div class="row"><div class='col-4'><strong>Stage:</strong></div><div class='col-8'><span data-bs-toggle="tooltip" data-bs-html="true" title="<em>Evolves From: ${pokemon.evolvesFrom}</em> || <em>Evolves To: ${evolvesInto}</em>">${pokemon.stage}</span></div></div>
+        <div class="row"><div class='col-4'><strong>Card Type:</strong></div><div class='col-8'>${pokemon.cardType}</div></div>
+        <div class="row"><div class='col-4'><strong>Generation:</strong></div><div class='col-8'>${pokemon.generation}(${pokemon.pokedexId})</div></div>
+        <div class="row"><div class='col-4'><strong>Weakness:</strong></div><div class='col-8'>${weakness}</div></div>
+        <div class="row"><div class='col-4'><strong>Retreat Cost:</strong></div><div class='col-8'>${pokemon.retreatCost}</div></div>
+        <div class="row"><div class='col-4'><strong>Set:</strong></div><div class='col-8'>${pokemon.set}</div></div>
+        <div class="row"><div class='col-4'><strong>Pack:</strong></div><div class='col-8'>${pokemon.pack}</div></div>
+        ${pokemon.abilityInfo.name ? `<div class="row"><div class='col-4'><strong>Ability:</strong></div><div class='col-8'><span data-bs-toggle="tooltip" data-bs-html="true" title="<em>${pokemon.abilityInfo.description}</em>">${pokemon.abilityInfo.name}</span></div></div>` : ''}
+        <div class="row"><div class='col-4'><strong>Attacks:</strong></div><div class='col-8'>${attacks}</div></div>
         `;
 
     if(window.innerWidth < 1000) modal.style.display = 'block';
@@ -286,12 +287,12 @@ function openModal(index) {
     modalImage.style.height = modalImage.naturalHeight.toString() + 'px';
     modalImage.style.width = modalImage.naturalWidth.toString() + 'px';
     modalDescription.style.height = modalImage.naturalHeight.toString() + 'px';
-    modalDescription.style.width = (modalImage.naturalWidth * 1.25).toString() + 'px';
+    modalDescription.style.width = (modalImage.naturalWidth).toString() + 'px';
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
     })
-    if(pokemon.abilityName == '') document.querySelector('#modalDescription .row:last-child .col-7').style.height = ((512/14.5)*2.5).toString() + 'px';
+    if(pokemon.abilityName == '') document.querySelector('#modalDescription .row:last-child .col-8').style.height = ((512/14.5)*2.5).toString() + 'px';
     currentImageIndex = index;
 }
 
