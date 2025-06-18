@@ -274,7 +274,7 @@ function openModal(index) {
         <div class="row"><div class='col-4'><strong>Card Type:</strong></div><div class='col-8'>${pokemon.cardType}</div></div>
         <div class="row"><div class='col-4'><strong>Generation:</strong></div><div class='col-8'>Gen ${words[pokemon.generation]}(ID: ${pokemon.pokedexId})</div></div>
         <div class="row"><div class='col-4'><strong>Weakness:</strong></div><div class='col-8'>${weakness}</div></div>
-        <div class="row"><div class='col-4'><strong>Retreat:</strong></div><div class='col-8'>${pokemon.retreatCost}</div></div>
+        <div class="row"><div class='col-4'><strong>Retreat Cost:</strong></div><div class='col-8'>${pokemon.retreatCost}</div></div>
         <div class="row"><div class='col-4'><strong>Set:</strong></div><div class='col-8'>${pokemon.set}</div></div>
         <div class="row"><div class='col-4'><strong>Pack:</strong></div><div class='col-8'>${pokemon.pack}</div></div>
         ${pokemon.abilityInfo.name ? `<div class="row"><div class='col-4'><strong>Ability:</strong></div><div class='col-8'><span data-bs-toggle="tooltip" data-bs-html="true" title="<em>${pokemon.abilityInfo.description}</em>">${pokemon.abilityInfo.name}</span></div></div>` : ''}
@@ -287,7 +287,7 @@ function openModal(index) {
     modalImage.style.height = modalImage.naturalHeight.toString() + 'px';
     modalImage.style.width = modalImage.naturalWidth.toString() + 'px';
     modalDescription.style.height = modalImage.naturalHeight.toString() + 'px';
-    modalDescription.style.width = (modalImage.naturalWidth).toString() + 'px';
+    modalDescription.style.width = (modalImage.naturalWidth * 1.05).toString() + 'px';
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
