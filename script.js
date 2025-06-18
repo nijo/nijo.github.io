@@ -230,6 +230,7 @@ function openModal(index) {
     const modal = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
     const modalDescription = document.getElementById('modalDescription');
+    const words = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
     var type = '';
     var weakness = '';
     var attacks = '';
@@ -272,7 +273,7 @@ function openModal(index) {
         <div class="row"><div class='col-4'><strong>HP:</strong></div><div class='col-8'>${pokemon.hp}</div></div>
         <div class="row"><div class='col-4'><strong>Stage:</strong></div><div class='col-8'><span data-bs-toggle="tooltip" data-bs-html="true" title="<em>Evolves From: ${pokemon.evolvesFrom}</em> || <em>Evolves To: ${evolvesInto}</em>">${pokemon.stage}</span></div></div>
         <div class="row"><div class='col-4'><strong>Card Type:</strong></div><div class='col-8'>${pokemon.cardType}</div></div>
-        <div class="row"><div class='col-4'><strong>Generation:</strong></div><div class='col-8'>${pokemon.generation}(${pokemon.pokedexId})</div></div>
+        <div class="row"><div class='col-4'><strong>Generation:</strong></div><div class='col-8'>Gen ${words[pokemon.generation]}(ID: ${pokemon.pokedexId})</div></div>
         <div class="row"><div class='col-4'><strong>Weakness:</strong></div><div class='col-8'>${weakness}</div></div>
         <div class="row"><div class='col-4'><strong>Retreat Cost:</strong></div><div class='col-8'>${pokemon.retreatCost}</div></div>
         <div class="row"><div class='col-4'><strong>Set:</strong></div><div class='col-8'>${pokemon.set}</div></div>

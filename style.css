@@ -220,11 +220,11 @@ html {
     color: black;
     border-radius: 15px;
 }
-.col-7{
+.col-8{
     border-bottom: 1px solid black;
     border-left: 1px solid black;
 }
-.col-5{
+.col-8{
     border-bottom: 1px solid black;
 }
 .row{
@@ -244,7 +244,7 @@ html {
     height: calc((512px/14.5)*2);
     border-bottom: 1px solid black;
 }
-#modalDescription .row:last-child .col-5, #modalDescription .row:last-child .col-7{
+#modalDescription .row:last-child .col-4, #modalDescription .row:last-child .col-8{
     height: calc((512px/14.5)*1.5);
     border-bottom: 0px solid black;
 }
