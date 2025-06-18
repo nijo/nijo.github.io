@@ -238,8 +238,7 @@ function openModal(index) {
     modalImage.alt = pokemon.name;
     if(pokemon.attackInfo != 'NA' && pokemon.attackInfo.length != 0){
         attacks = pokemon.attackInfo.map(function(a) {
-            return `<li><strong data-bs-toggle="tooltip" data-bs-html="true" title="${a.attackExtra ? '<em>' + a.attackExtra + '</em>' : ''}">
-            ${a.attackExtra != 'NA' ? '<u>' + a.attackName + '</u>' : a.attackName}</strong> - ${a.attackDamage || '00'} (${a.attackCost.map(b => `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Types%2F${b}.png?alt=media" style="width:14px">`).join('')})</li>`;
+            return `<li><strong data-bs-toggle="tooltip" data-bs-html="true" title="${a.attackExtra != 'NA' ? '<em>' + a.attackExtra + '</em>' : ''}">${a.attackExtra != 'NA' ? '<u>' + a.attackName + '</u>' : a.attackName}</strong> - ${a.attackDamage || '00'} (${a.attackCost.map(b => `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Types%2F${b}.png?alt=media" style="width:14px">`).join('')})</li>`;
         }).join('');
     }
     const rarity = pokemon.rarity.map(a => `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Rarities%2F${a}.png?alt=media" style="width:14px">`).join('');
@@ -275,7 +274,7 @@ function openModal(index) {
         <div class="row"><div class='col-4'><strong>Card Type:</strong></div><div class='col-8'>${pokemon.cardType}</div></div>
         <div class="row"><div class='col-4'><strong>Generation:</strong></div><div class='col-8'>Gen ${words[pokemon.generation]}(ID: ${pokemon.pokedexId})</div></div>
         <div class="row"><div class='col-4'><strong>Weakness:</strong></div><div class='col-8'>${weakness}</div></div>
-        <div class="row"><div class='col-4'><strong>Retreat Cost:</strong></div><div class='col-8'>${pokemon.retreatCost}</div></div>
+        <div class="row"><div class='col-4'><strong>Retreat:</strong></div><div class='col-8'>${pokemon.retreatCost}</div></div>
         <div class="row"><div class='col-4'><strong>Set:</strong></div><div class='col-8'>${pokemon.set}</div></div>
         <div class="row"><div class='col-4'><strong>Pack:</strong></div><div class='col-8'>${pokemon.pack}</div></div>
         ${pokemon.abilityInfo.name ? `<div class="row"><div class='col-4'><strong>Ability:</strong></div><div class='col-8'><span data-bs-toggle="tooltip" data-bs-html="true" title="<em>${pokemon.abilityInfo.description}</em>">${pokemon.abilityInfo.name}</span></div></div>` : ''}
