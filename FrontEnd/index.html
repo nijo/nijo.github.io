@@ -121,7 +121,7 @@
         <div class="container-lg my-4">
             <div class="card shadow">
                 <div class="card-body">
-                    <div id="Gallery" class="container-fluid"></div>
+                    <div id="Gallery" class="container-fluid" style="display:none;"></div>
                     <div id="Table" class="table-responsive" style="display:none;">
                         <table class="table table-bordered table-hover table-striped align-middle" id="pokemonTable">
                             <thead>
@@ -136,6 +136,13 @@
                                 <!-- Data will be loaded here by JS -->
                             </tbody>
                         </table>
+                    </div>
+                    <div id="Links" class="text-center">
+                        <p class="text-muted">
+                            Use the links below to switch between the Gallery and Table views of the Pokémon TCG Pocket Gallery.
+                        </p>
+                        <a href="index.html?view=gallery" class="btn btn-primary m-2">View Gallery</a>
+                        <a href="index.html?view=table" class="btn btn-secondary m-2">View Table</a>
                     </div>
                 </div>
             </div> 
@@ -260,6 +267,8 @@
             function showViewBasedOnQuery() {
                 const galleryDiv = document.getElementById('Gallery');
                 const tableDiv = document.getElementById('Table');
+                const linksDiv = document.getElementById('Links');
+
                 // Parse query parameters
                 const params = new URLSearchParams(window.location.search);
                 const view = params.get('view');
@@ -267,10 +276,17 @@
                 if (view && view.toLowerCase() === 'table') {
                     if (galleryDiv) galleryDiv.style.display = 'none';
                     if (tableDiv) tableDiv.style.display = '';
+                    if (linksDiv) linksDiv.style.display = 'none';
                 } 
                 else if (view && view.toLowerCase() === 'gallery') {
                     if (galleryDiv) galleryDiv.style.display = '';
                     if (tableDiv) tableDiv.style.display = 'none';
+                    if (linksDiv) linksDiv.style.display = 'none';
+                }
+                else {
+                    if (galleryDiv) galleryDiv.style.display = 'none';
+                    if (tableDiv) tableDiv.style.display = 'none';
+                    if (linksDiv) linksDiv.style.display = '';
                 }
             }
             // Run on page load
