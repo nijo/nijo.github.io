@@ -146,7 +146,7 @@ function setFilters(currentFilters, searchQuery) {
         }
     });
     SearchedData = filteredData;
-    renderData(SearchedData);
+    renderTableData(SearchedData);
     if(flag != true){
         showFilterAppliedPopup(SearchedData);
     }
