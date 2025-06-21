@@ -43,7 +43,12 @@ async function loadData(flag) {
         populateFilterCheckboxes('attackFilter', groupedData[1].attack, 'attack');
         populateFilterCheckboxes('evolutionFilter', groupedData[1].evolvesInto, 'evolution');
 
-        renderData(Object.values(groupedData[0]));
+        if (view && view.toLowerCase() === 'table') {
+            renderTableData(Object.values(groupedData[0]));
+        } 
+        else if (view && view.toLowerCase() === 'gallery') {
+            renderGalleryData(Object.values(groupedData[0]));
+        }
     }
     else{
         setFilters(currentFilters, searchQuery, flag)
