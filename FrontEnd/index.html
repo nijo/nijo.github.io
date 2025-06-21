@@ -122,6 +122,21 @@
             <div class="card shadow">
                 <div class="card-body">
                     <div id="Gallery" class="container-fluid"></div>
+                    <div id="Table" class="table-responsive" style="display:none;">
+                        <table class="table table-bordered table-hover table-striped align-middle" id="pokemonTable">
+                            <thead>
+                                <tr>
+                                    <th>slNo</th>
+                                    <th>Name</th>
+                                    <th>Rarity</th>
+                                    <th>Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Data will be loaded here by JS -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div> 
         </div>
@@ -147,7 +162,7 @@
         <script src="script.js"></script>
         <script>
             //Render the gallery.
-            function renderData(groupedData) {
+            function renderGalleryData(groupedData) {
                 const galleryContainer = document.getElementById('Gallery');
 
                 galleryContainer.style.padding = '0px';
@@ -166,6 +181,100 @@
                     galleryContainer.appendChild(photoDiv);
                 });
             }
+            
+            //Render the table.
+            function renderTableData(groupedData) {
+                let html = '';
+                groupedData.forEach((item, index) => {
+                    // Rarity images and text
+                    let rarityText = '';
+                    let rarityImgs = '';
+                    let type = '';
+                    let weakness = '';
+                    if (Array.isArray(item.rarity)) {
+                        item.rarity.forEach(r => {
+                            rarityText += r + ', ';
+                            rarityImgs += `<img src="https://firebasestorage.googleapis.com/v0/b/ptcgp-d1101.firebasestorage.app/o/Rarities%2F${r}.png?alt=media" alt="${r}" style="width:14px">`;
+                        });
+                    }
+                    html += `<tr>
+                            <td onclick = openModal(${index}) class="nowrap">${item.slNo || ''}</td>
+                            <td onclick = openModal(${index})>
+                                <span class="badge-type name-search">${item.name || ''}</span>
+                            </td>
+                            <td onclick = openModal(${index})>
+                                ${rarityImgs}
+                                <span class="d-none rarity-search">${rarityText.trim()}</span>
+                            </td>
+                            <td>
+                                <span class="count-value">${item.count || 0}</span>
+                                <select class="form-select form-select-sm d-none count-input" style="width:auto;display:inline-block;">
+                                    ${[...Array(26).keys()].map(i => `<option value="${i}" ${i == (item.count || 0) ? 'selected' : ''}>${i}</option>`).join('')}
+                                </select>
+                                <button class="btn btn-link btn-sm p-0 edit-btn" title="Edit"><i class="fa fa-pencil-alt"></i></button>
+                                <button class="btn btn-link btn-sm p-0 save-btn d-none" title="Save"><i class="fa fa-check"></i></button>
+                                <input type="hidden" class="row-slno" value="${item.slNo || ''}">
+                                <span class="d-none count-search">${item.count || 0}</span>
+                            </td>
+                        </tr>`;
+                });
+                $('#pokemonTable tbody').html(html);
+            }
+            
+            //Toggle edit/save for Count
+            $('#pokemonTable').on('click', '.edit-btn', function() {
+                var td = $(this).closest('td');
+                td.find('.count-value').addClass('d-none');
+                td.find('.count-input').removeClass('d-none');
+                td.find('.edit-btn').addClass('d-none');
+                td.find('.save-btn').removeClass('d-none');
+            });
+
+            $('#pokemonTable').on('click', '.save-btn', function() {
+                var td = $(this).closest('td');
+                var newCount = td.find('.count-input').val();
+                var slNo = td.find('.row-slno').val();
+                var btn = $(this);
+                var groupedData = [];
+
+                // AJAX to save to DB (PUT request)
+                $.ajax({
+                    url: 'https://ptcgp-d1101-default-rtdb.firebaseio.com/' + slNo + '.json',
+                    method: 'PATCH',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ count: parseInt(newCount) }),
+                    success: function(response) {
+                        td.find('.count-value').text(newCount).removeClass('d-none');
+                        td.find('.count-input').addClass('d-none');
+                        td.find('.edit-btn').removeClass('d-none');
+                        td.find('.save-btn').addClass('d-none');
+                        loadData(true);
+                    },
+                    error: function(xhr){
+                        alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+                    }
+                });
+            });
+            
+            //Toggle visibility of Gallery and Table
+            function showViewBasedOnQuery() {
+                const galleryDiv = document.getElementById('Gallery');
+                const tableDiv = document.getElementById('Table');
+                // Parse query parameters
+                const params = new URLSearchParams(window.location.search);
+                const view = params.get('view');
+                // Show Table if ?view=table, else show Gallery
+                if (view && view.toLowerCase() === 'table') {
+                    if (galleryDiv) galleryDiv.style.display = 'none';
+                    if (tableDiv) tableDiv.style.display = '';
+                } 
+                else if (view && view.toLowerCase() === 'gallery') {
+                    if (galleryDiv) galleryDiv.style.display = '';
+                    if (tableDiv) tableDiv.style.display = 'none';
+                }
+            }
+            // Run on page load
+            showViewBasedOnQuery();
     </script>
     </body>
 </html>
