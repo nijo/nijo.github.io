@@ -172,7 +172,7 @@
             // Parse query parameters
             const params = new URLSearchParams(window.location.search);
             const view = params.get('view');
-            
+
             //Render the gallery.
             function renderGalleryData(groupedData) {
                 const galleryContainer = document.getElementById('Gallery');
@@ -230,7 +230,7 @@
                             </td>
                         </tr>`;
                 });
-                $('#pokemonTable tbody').html(html);
+                document.querySelector('#pokemonTable tbody').innerHTML = html;
             }
             
             //Toggle edit/save for Count
